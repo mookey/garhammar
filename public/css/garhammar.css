@@ -101,11 +101,11 @@ legend {
     display: inline-block;
   }
 
-  div.not-xs {
+  ul.not-xs {
     display: block;
   }
 
-  .xs-only {
+  .tab.xs-only {
     display: none;
   }
 }
@@ -1778,19 +1778,16 @@ body {
   padding-right: 20px;
 }
 .tabs .tab {
-  box-sizing: border-box;
-  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
   width: 100%;
   display: inline-block;
   box-sizing: border-box;
   padding: 15px 15px 10px 15px;
-  /*color: $font-color;*/
   border-left: 5px solid transparent;
   background: #fcfcfc;
 }
 .tabs .tab:hover {
   border-left-color: #e5e5e5;
-  /*.icon {color: $black;}*/
 }
 .tabs .tab .icon {
   margin-top: -4px;
@@ -1799,13 +1796,21 @@ body {
 .tabs .active {
   border-left-color: #e5e5e5;
 }
-.tabs .tabs-first {
-  border-top: 1px solid #e5e5e5;
+.tabs .tabs-last {
+  border-bottom: 1px solid #e5e5e5;
 }
 .tabs .tabs-content {
   border-left: 5px solid #e5e5e5;
   padding: 15px 10px 30px 15px;
+  border-top: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid $box-border-grey;*/
+}
+.tabs .tabs-content-last {
+  border-top: none;
   border-bottom: 1px solid #e5e5e5;
+}
+.tabs .tabs-large {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -1820,7 +1825,10 @@ body {
   .tabs li:first-child {
     border-top: 0;
   }
-  .tabs .tab {
+  .tabs .tabs-large {
+    display: block;
+  }
+  .tabs .tabs-large a {
     border: 0;
     width: 100%;
     display: inline-block;
@@ -1828,11 +1836,14 @@ body {
     border-top: 5px solid transparent;
     background: white;
   }
-  .tabs .tab:hover {
+  .tabs .tabs-large a:hover {
     border-top-color: #e5e5e5;
   }
-  .tabs .active {
+  .tabs .tabs-large .active {
     border-top: 5px solid #e5e5e5;
+  }
+  .tabs .tab {
+    display: none;
   }
   .tabs .nav-four li {
     width: 25%;
@@ -1841,9 +1852,9 @@ body {
     width: 50%;
   }
   .tabs .tabs-content {
+    border: 0;
     border-left: 5px solid #e5e5e5;
     padding: 0 0 0 15px;
-    border-bottom: 0;
   }
 }
 .spinner {

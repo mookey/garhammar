@@ -107,6 +107,9 @@ garhammar.initComponents = function(ctx) {
   function requireComponent(c) {
     var name = c.getAttribute('data-component'),
         id   = c.getAttribute('data-id');
+    if (c.classList.contains('js-initialized')) {
+      return;
+    }
     require(['components/' + name], function(component) {
 
       // If there supposed to be only one instance of this
@@ -123,6 +126,7 @@ garhammar.initComponents = function(ctx) {
         return;
       }
       garhammar.components[name] = component.init(c);
+      c.classList.add('js-initialized');
     });
   }
 };

@@ -1,110 +1,67 @@
 define(['templates/templates', 'components/base', 'utils/utils'], function(templates, Base, utils) {
   
   var tabs = {};
-  var SIZE_MEDIUM = 768;
 
   tabs.init = function(aView) {
-    var f = Object.create(new Base());
-    f.view = aView;
-    f.initLinks = initLinks;
-    f.initContext = initContext;
-    f.onEvent = onEvent;
+    var f             = Object.create(new Base());
+    f.view            = aView;
+    f.initLinks       = initLinks;
+    f.addTabsListener = addTabsListener;
+    f.initContext     = initContext;
     f.initLinks();
-    garhammar.registerListener('resize', 'tabs');
     return f;
   };
 
-  function onEvent(eventName) {
-    this.initLinks();
-  }
-
   function initLinks() {
-    var self = this;
-    var tabLinks;
-    var tabs;
-    if (isViewportSmall()) {
-      tabs = this.view.querySelector('.js-tabs-small');
-    } else {
-      tabs = this.view.querySelector('.js-tabs-large');
-    }
-    if (tabs.classList.contains('js-initialized')) {
-      return;
-    }
-    tabs.classList.add('js-initialized');
-    tabLinks = tabs.querySelectorAll('.js-tabs-link');
-
-    utils.each(tabLinks, function(link) {
-      addTabsListener.apply(self, [link, tabLinks]);
-    });
-    utils.each(tabLinks, function(link) {
-      self.initContext(link);
-    });
+    this.addTabsListener();
+    this.initContext();
   }
 
-  function initContext(link) {
-    var content;
-    var template;
-    var wrapper;
-    if (!link.classList.contains('js-active')) {
-      return;
-    }
-    if (isViewportSmall()) {
-      wrapper = utils.findParentBySelector(link, '.js-tabs-wrapper');
-      content = wrapper.querySelector('.js-tabs-content');
-    } else {
-      content = this.view.querySelector('.js-tabs-large .js-tabs-content');
-    }
-    template = link.getAttribute('data-runtime-template');
-    if (!template) {
-      return;
-    }
-    content.innerHTML = templates[link.getAttribute('data-runtime-template')]();
+  function initContext() {
+    var activeLink    = this.view.querySelector('a.js-active');
+    var contents      = this.view.querySelectorAll('.js-tabs-content');
+    var content       = contents[parseInt(activeLink.getAttribute('data-content-id'), 10)];
+    content.innerHTML = templates[activeLink.getAttribute('data-runtime-template')]();
     garhammar.initComponents(content);
   }
 
-  function isViewportSmall() {
-    return (Math.max(document.documentElement.clientWidth, window.innerWidth || 0)) < SIZE_MEDIUM;
-  }
-
-  function addTabsListener(link, tabLinks) {
-    var self = this;
-    link.addEventListener('click', function(ev) {
-      var wrapper;
-      var content;
-      var icon;
-      var size;
-      ev.preventDefault();
-      wrapper   = utils.findParentBySelector(this, '.js-tabs-wrapper');
-      content   = wrapper.querySelector('.js-tabs-content');
-
-      if (!isViewportSmall()) {
-        utils.each(wrapper.querySelectorAll('.js-tabs-link'), function(link) {
+  function addTabsListener() {
+    var self      = this;
+    var tabLinks  = this.view.querySelectorAll('.js-tabs-link');
+    var contents  = this.view.querySelectorAll('.js-tabs-content');
+    utils.each(tabLinks, function(link) {
+      link.addEventListener('click', function(ev) {
+        var contentId;
+        ev.preventDefault();
+        utils.each(contents, function(content) {
+          content.classList.add('hide');
+        });
+        utils.each(tabLinks, function(link) {
+          var icon;
           link.classList.remove('active');
           link.classList.remove('js-active');
+          icon = link.querySelector('span');
+          if (icon) {
+            icon.classList.remove('icon-arrow-up');
+            icon.classList.add('icon-arrow-down');
+          }
         });
-        content.classList.remove('hide');
-        this.classList.add('js-active');
-        this.classList.add('active');
-        self.initContext(this);
-        return;
-      }
-
-      icon = link.querySelector('.icon');
-      if (link.classList.contains('js-active')) {
-        content.classList.add('hide');
-        icon.classList.add('icon-arrow-down');
-        icon.classList.remove('icon-arrow-up');
-        this.classList.remove('js-active');
-        this.classList.remove('active');
-        return;
-      } 
-      content.classList.remove('hide');
-      icon.classList.remove('icon-arrow-down');
-      icon.classList.add('icon-arrow-up');
-      this.classList.add('js-active');
-      this.classList.add('active');
-      self.initContext(this);
+        contentId = parseInt(this.getAttribute('data-content-id'), 10);
+        utils.each(self.view.querySelectorAll('.js-tabs-link[data-content-id="' + contentId + '"]'), function(link) {
+          var icon;
+          link.classList.add('active');
+          link.classList.add('js-active');
+          icon = link.querySelector('span');
+          if (icon) {
+            icon.classList.remove('icon-arrow-down');
+            icon.classList.add('icon-arrow-up');
+          }    
+        });
+        contents[contentId].classList.remove('hide');
+        self.initContext();
+      });
     });
+    return;
   }
 
   return tabs;
