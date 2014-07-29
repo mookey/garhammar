@@ -1,0 +1,54 @@
+$screen-s : 500px;
+$screen-md : 768px;
+$screen-l : 992px;
+
+.not-xs {
+  display: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+.buttons.not-xs {
+  display: none;
+}
+
+@media (min-width: $screen-md) {
+  span.not-xs {
+    display: inline;
+  }
+  .buttons.not-xs {
+    display: inline-block;
+  }
+  div.not-xs {
+    display: block;
+  }
+  .xs-only {
+    display: none;
+  }
+}
+
+.left-10 {
+  margin-left: 10px;
+}
+
+.right-10 {
+  margin-right: 10px;
+}
+
+.top-10 {
+  margin-top: 10px;
+}
+
+.top-20 {
+  margin-top: 20px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.relative {
+  position: relative;
+}

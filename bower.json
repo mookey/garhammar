@@ -1,0 +1,18 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": {
+    "d3": "~3.4.8",
+    "domReady": "~2.0.1",
+    "bower-google-analytics": "~0.1.1",
+    "requirejs": "~2.1.14",
+    "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git",
+    "topojson": "~1.6.14",
+    "requirejs-plugins": "~1.0.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}

@@ -1,0 +1,85 @@
+.marker {
+    stroke: blue;
+    stroke-opacity: .3;
+    stroke-width: 2px;
+    fill: blue;
+    fill-opacity: .1;
+    &.pulse {
+      stroke: red;
+      fill: red;      
+    }
+}
+
+
+svg {
+  text {
+    font-size: 30px;
+  }
+  .unit {
+    fill: #FAFAFA;
+    stroke: #C7C7C7;
+    stroke-width: 1px;
+  }
+  .highlight {
+    fill : url(#diagonalHatch);
+  }
+  .route {
+    stroke: #999;
+    fill: transparent;
+    &.shadow {
+      stroke: #ccc;
+      fill: transparent;
+    }
+  }
+  .graph-tooltip {
+    cursor: pointer;
+  }
+}
+
+.code-route-wrapper {
+  position: relative;
+}
+
+.code-route-tooltip-marker {
+  .question {
+    cursor: pointer;
+    display: block;
+    padding: 5px;
+    background: $tooltip-background-color;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    color: $white;
+    margin-right: 0;
+    box-shadow: 0 0 9px 0px $tooltip-background-color;
+    &:before {
+      right: 85%;
+      top: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+      border-color: rgba(0, 0, 0, 0);
+      border-right-color: $tooltip-background-color;
+      border-width: 12px;
+      margin-top: -12px;
+    }
+    &:hover {
+      color: $white;
+      box-shadow: 0 0 9px 0px $white;
+    }
+    &.left:before {
+      left: 85%;
+      border-color: rgba(0, 0, 0, 0);
+      border-left-color: $tooltip-background-color;
+    }
+    @include transition(box-shadow 0.2s linear);
+  }
+  .icon-question {
+    margin-right: 0;
+  }
+/*  @include transition(all 0.4s linear);*/
+}

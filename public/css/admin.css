@@ -1,0 +1,82 @@
+/*$red-lighter: #ee9595;*/
+/*$red-darker: #e03d3d;*/
+/*$green : #6ebe54;*/
+.black {
+  color: black;
+}
+
+.regular {
+  color: #333333;
+}
+
+.lightest {
+  color: #a5a5a5;
+}
+
+.red {
+  color: #e76969;
+}
+
+.blue {
+  color: #2bacb8;
+}
+
+.blue-lighter {
+  color: #adf1f6;
+}
+
+.blue-darker {
+  color: #21858f;
+}
+
+.styles .color {
+  height: 30px;
+}
+.styles .blue {
+  background-color: #2bacb8;
+}
+.styles .blue-lighter {
+  background-color: #adf1f6;
+}
+.styles .blue-darker {
+  background-color: #21858f;
+}
+.styles .grey-1 {
+  background-color: #fcfcfc;
+}
+.styles .grey-2 {
+  background-color: #e5e5e5;
+}
+.styles .grey-3 {
+  background-color: #cccccc;
+}
+.styles .grey-4 {
+  background-color: #b6b6b6;
+}
+.styles .grey-5 {
+  background-color: #a5a5a5;
+}
+.styles .grey-6 {
+  background-color: #8b8b8b;
+}
+.styles .grey-7 {
+  background-color: #333333;
+}
+.styles .black {
+  background-color: black;
+}
+.styles .red-lighter {
+  background-color: #e99595;
+}
+.styles .red {
+  background-color: #e76969;
+}
+.styles .green-tabs {
+  background-color: #aae09f;
+}
+.styles .green-lighter {
+  background-color: #8ed378;
+}
+.styles .green {
+  background-color: #469c2b;
+}

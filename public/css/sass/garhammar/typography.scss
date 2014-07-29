@@ -1,0 +1,67 @@
+$font-stack-header  : 'Oswald', sans-serif;
+$font-stack-body    : 'Varela Round', 'sans-serif';
+$font-stack-input   : 'Courier New', Courier, monospace;
+
+$font-size-xx-large : 44px;
+$font-size-x-large  : 32px;
+$font-size-large    : 24px;
+$font-size-medium   : 14px;
+$font-size-small    : 12px;
+$alert-icon         : 18px;
+
+h1, h2, h3, .h1, .h2, .h3 {
+  margin: 15px 0 5px 0;
+  font-family: $font-stack-header;
+  font-weight: 300;
+}
+
+h1, .h1 {
+  font-size: $font-size-xx-large;
+}
+
+h2, .h2 {
+  font-size: $font-size-x-large;
+}
+
+h3, .h3 {
+  margin: 10px 0 0 0;
+  font-size: $font-size-large;
+}
+
+
+.small {
+  font-size: $font-size-small;
+}
+
+.lighter {
+  color: $font-color-lighter;
+}
+
+a {
+  text-decoration: none;
+  color: $blue;
+  @include transition(color 0.4s linear);
+  &:hover {
+    color: $black;
+  }
+  .icon {
+    margin-right: 5px;
+  }
+}
+
+
+.icon {
+  font-size: 24px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.text-header {
+  font-family: $font-stack-header;
+}
+
+.text-top {
+  vertical-align: top;
+}

@@ -1,0 +1,49 @@
+.alert {
+  border: 3px solid $green-lighter;
+  color: $green;
+  line-height: 32px;
+  .mark {
+    padding: 4px;
+    font-size: 30px;
+    background-color: $green-lighter;
+    color: #fff;
+    margin: -3px;
+  }
+  .alert-text {
+    margin-left: 10px;
+    color: $green;
+    text-transform: uppercase;
+  }
+  a {
+    float: right;
+    margin: 0 4px;
+    @include transition(background-color 0.4s linear);
+    &:hover {
+      background-color: $green;
+    }
+  }
+  .icon-cross {
+    margin: -14px -14px 0 0;
+    float: right;
+    background-color: $green-lighter;
+    padding: 3px;
+    border-radius: 50%;
+    color: $white;
+  }
+  &.error {
+    border-color: $red-lighter;
+    .mark {
+      background-color: $red-lighter;
+    }
+    .alert-text {
+      color: $red;
+    }
+    .icon-cross {
+      background-color: $red-lighter;
+    }
+    a:hover {
+      background-color: $red;
+    }
+  }
+}
+

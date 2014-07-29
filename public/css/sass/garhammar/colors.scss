@@ -1,0 +1,109 @@
+$white : #fff;
+$black : #000;
+
+$font-color : #333;
+$font-color-lighter: #8b8b8b;
+$font-color-lightest: #a5a5a5;
+
+$blue-lighter: #adf1f6;
+$blue : #2bacb8;
+$blue-darker: #21858f;
+
+/*$red-lighter: #ee9595;*/
+$red-lighter : #e99595;
+$red : #e76969;
+/*$red-darker: #e03d3d;*/
+/*$green : #6ebe54;*/
+$green-tabs : #aae09f;
+$green-lighter : #8ed378;
+$green : #469c2b;
+
+$box-grey: #fcfcfc;
+$box-border-grey: #e5e5e5;
+$input-border-color: $font-color-lighter;
+$input-disabled: $box-border-grey;
+$disabled-background-color: $box-border-grey;
+$disabled-border-color: #ccc;
+$disabled-color: #b6b6b6;
+
+$tooltip-background-color: $font-color;
+
+.black {
+  color: $black;
+}
+
+.regular {
+  color: $font-color;
+}
+
+.lightest {
+  color: $font-color-lightest;
+}
+
+.red {
+  color: $red;
+}
+
+.blue {
+  color: $blue;
+}
+.blue-lighter {
+  color: $blue-lighter;
+}
+.blue-darker {
+  color: $blue-darker;
+}
+
+.styles {
+  .color {
+    height: 30px;
+  }
+  .blue {
+    background-color: $blue;
+  }
+  .blue-lighter {
+    background-color: $blue-lighter;
+  }
+  .blue-darker {
+    background-color: $blue-darker;
+  }
+  .grey-1 {
+    background-color: $box-grey;
+  }
+  .grey-2 {
+    background-color: $box-border-grey;
+  }
+  .grey-3 {
+    background-color: $disabled-border-color;
+  }
+  .grey-4 {
+    background-color: $disabled-color;
+  }
+  .grey-5 {
+    background-color: $font-color-lightest;
+  }
+  .grey-6 {
+    background-color: $font-color-lighter;
+  }
+  .grey-7 {
+    background-color: $font-color;
+  }
+  .black {
+    background-color: $black;
+  }
+  .red-lighter {
+    background-color: $red-lighter;
+  }
+  .red {
+    background-color: $red;
+  }
+  .green-tabs {
+    background-color: $green-tabs;
+  }
+  .green-lighter {
+    background-color: $green-lighter;
+  }
+  .green {
+    background-color: $green;
+  }
+}

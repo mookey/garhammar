@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+      {{#if toggleProdSettings}}
+        {{#if isAdmin}}
+          <link rel="stylesheet" href="/dist/css/admin.min.283921319652d8e0d06fd014ebe1e8a8.css" type="text/css" />
+        {{else}}
+          <link rel="stylesheet" href="/dist/css/garhammar.min.f64b656b5f2791041796b4682a4bd1b5.css" type="text/css" />
+        {{/if}}
+      {{else}}
+        {{#if isAdmin}}
+          <link rel="stylesheet" href="/css/admin.css" type="text/css" />
+        {{else}}
+          <link rel="stylesheet" href="/css/garhammar.css" type="text/css" />
+        {{/if}}
+      {{/if}}
+      <link href='http://fonts.googleapis.com/css?family=Oswald:400,300|Varela+Round' rel='stylesheet' type='text/css'>
+      <title>Garhammar</title>
+      <link rel="shortcut icon" href="img/favicon.ico" />
+  </head>
+  <body>
+      {{> site/layouts/sidebar}}
+      <div id="main">
+        {{{body}}}
+      </div>
+      {{> require_conf}}
+  </body>
+</html>
