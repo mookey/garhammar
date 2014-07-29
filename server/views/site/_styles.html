@@ -88,52 +88,40 @@
 
       <div class="desc">
 
-        <div class="js-component" data-component="tabs">
-          <div class="tabs not-xs js-tabs-wrapper js-tabs-large">
-            <ul class="nav-four">
+
+        <div class="tabs js-tabs-wrapper js-component" data-component="tabs">
+          <ul class="tabs-large nav-four">
               <li>
-                  <a class="active tab js-active js-tabs-link" href="" data-runtime-template="_style_first">First</a>
+                  <a class="js-tabs-link" href="" data-runtime-template="_style_first" data-content-id="0">First</a>
               </li><li>
-                  <a class="tab js-tabs-link" href="" data-runtime-data="true" data-runtime-template="_style_last">Last</a>
+                  <a class="active js-active js-tabs-link" href="" data-runtime-data="true" data-runtime-template="_style_last" data-content-id="1">Last</a>
               </li><li>
-                  <a class="tab js-tabs-link" href="" data-runtime-template="_style_and">and</a>
+                  <a class="js-tabs-link" href="" data-runtime-template="_style_and" data-content-id="2">and</a>
               </li><li>
-                  <a class="tab js-tabs-link" href="" data-runtime-data="true" data-runtime-template="_style_always">Always</a>
+                  <a class="js-tabs-link" href="" data-runtime-data="true" data-runtime-template="_style_always" data-content-id="3">Always</a>
               </li>
-            </ul>
-            <div class="tabs-content js-tabs-content">
-              <div class="spinner"></div>
-            </div>
+          </ul>
+
+          <a class="tab js-tabs-link" href="" data-runtime-template="_style_first" data-content-id="0">First<span class="pull-right icon icon-arrow-down"></span></a>  
+          <div class="hide tabs-content js-tabs-content">
+            <div class="spinner"></div>
           </div>
-          <div class="tabs xs-only js-tabs-small">
-            <div class="js-tabs-wrapper">
-              <a class="tab tabs-first js-tabs-link" href="">First<span class="pull-right icon icon-arrow-down"></span></a>
-              <div class="tabs-content hide js-tabs-content">
-                1. Maecenas eu sapien ligula. Aliquam tempor urna sit amet congue accumsan. Sed volutpat tellus erat, a lacinia dui tristique sed. Cras sem est, adipiscing eget leo et, iaculis tempor justo. Vivamus at scelerisque dui, pretium lacinia metus. Sed nec lorem et nunc lacinia mattis.
-              </div>
-            </div>
-
-            <div class="js-tabs-wrapper">
-              <a class="tab js-tabs-link" href="">Last<span class="pull-right icon icon-arrow-down"></span></a>
-              <div class="tabs-content hide js-tabs-content">
-                2. Integer dapibus feugiat augue, id dapibus augue tristique in. Suspendisse elit orci, euismod non nulla ut, sagittis luctus nulla. Cras mattis est eget leo lacinia adipiscing. Nam facilisis sem massa, eget dignissim mi rhoncus in. Aliquam laoreet scelerisque leo sed luctus.
-              </div>
-            </div>
-
-            <div class="js-tabs-wrapper">
-              <a class="tab js-tabs-link" href="">and<span class="pull-right icon icon-arrow-down"></span></a>
-              <div class="tabs-content hide js-tabs-content">
-                3. In in ipsum sed velit viverra ultrices eu ut dolor. Sed ante nisl, vestibulum ac dui eget, vestibulum euismod ante. Nullam in aliquam augue. Etiam facilisis lacus vitae interdum hendrerit. Duis porta leo quis nunc porta volutpat. In ipsum erat, vulputate nec ipsum quis, tincidunt fermentum justo.
-              </div>
-            </div>
-
-            <div class="js-tabs-wrapper">
-              <a class="tab js-tabs-link" href="">Always<span class="pull-right icon icon-arrow-down"></span></a>
-              <div class="tabs-content hide js-tabs-content">
-                4. Duis blandit commodo elit a euismod. Nam viverra tellus egestas purus sollicitudin ornare. Ut eros lorem, imperdiet vel augue eget, rhoncus placerat tellus. Nulla in viverra orci, nec lacinia ante. Duis consectetur non lectus nec facilisis. Pellentesque lectus felis, laoreet blandit elementum condimentum, scelerisque malesuada sapien.
-              </div>
-            </div>
+          
+          <a class="tab active js-active js-tabs-link" href="" data-runtime-template="_style_last" data-content-id="1">Last<span class="pull-right icon icon-arrow-up"></span></a>
+          <div class="tabs-content js-tabs-content">
+            <div class="spinner"></div>
           </div>
+
+          <a class="tab js-tabs-link" href="" data-runtime-template="_style_and" data-content-id="2">and<span class="pull-right icon icon-arrow-down"></span></a>  
+          <div class="hide tabs-content js-tabs-content">
+            <div class="spinner"></div>
+          </div>
+          
+          <a class="tab tabs-last js-tabs-link" href="" data-runtime-template="_style_always" data-content-id="3">Always<span class="pull-right icon icon-arrow-down"></span></a>
+          <div class="hide tabs-content tabs-content-last js-tabs-content">
+            <div class="spinner"></div>
+          </div>
+
         </div>
       </div>
     </div>

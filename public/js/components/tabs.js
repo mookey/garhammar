@@ -19,8 +19,9 @@ define(['templates/templates', 'components/base', 'utils/utils'], function(templ
 
   function initContext() {
     var activeLink    = this.view.querySelector('a.js-active');
+    var contentId     = activeLink.getAttribute('data-content-id');
     var contents      = this.view.querySelectorAll('.js-tabs-content');
-    var content       = contents[parseInt(activeLink.getAttribute('data-content-id'), 10)];
+    var content       = contents[contentId];
     content.innerHTML = templates[activeLink.getAttribute('data-runtime-template')]();
     garhammar.initComponents(content);
   }
@@ -32,6 +33,7 @@ define(['templates/templates', 'components/base', 'utils/utils'], function(templ
     utils.each(tabLinks, function(link) {
       link.addEventListener('click', function(ev) {
         var contentId;
+        garhammar.removeListeners('resize');
         ev.preventDefault();
         utils.each(contents, function(content) {
           content.classList.add('hide');

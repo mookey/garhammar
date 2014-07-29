@@ -18,6 +18,7 @@ define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll']
     utils.each(this.view.querySelectorAll('a'), function(link) {
       link.addEventListener('click', function(ev) {
         var link = this;
+        garhammar.removeListeners('resize');
         if (link.href.indexOf('logout') > -1) {
           return;
         }

@@ -1,5 +1,13 @@
 'use strict';
 
+function l(a, b) {
+  if (b) {
+    console.log(a, b);
+    return;
+  }
+  console.log(a);
+}
+
 var garhammar = garhammar || {};
 garhammar.listeners = {};
 garhammar.components = garhammar.components || {};
@@ -18,13 +26,17 @@ garhammar.registerListener = function(eventName, listenerName, listenerId) {
   });
 };
 
+garhammar.removeListeners = function(eventName) {
+  delete this.listeners[eventName];
+};
+
 garhammar.componentsEventDispatcher = function(eventName) {
   var i;
   var len;
   var listener;
   var c;
   i = 0;
-  len = garhammar.listeners[eventName].length;
+  len = garhammar.listeners[eventName] ? garhammar.listeners[eventName].length : 0;
   for (; i < len; i++) {
     listener = garhammar.listeners[eventName][i];
     c = garhammar.components.get(listener.componentName, listener.componentId);
