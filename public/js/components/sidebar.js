@@ -1,3 +1,5 @@
+'use strict';
+
 define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll'], function(templates, utils, Base, smoothScroll) {
 
   var form = {};
@@ -9,7 +11,7 @@ define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll']
     f.callback = callback;
     f.addEventListeners();
     return f;
-  }
+  };
 
   function addEventListeners() {
     var self = this,
@@ -27,14 +29,14 @@ define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll']
           elem.parentNode.classList.remove('active');
         });
         link.parentNode.classList.add('active');
-        if (history.pushState) {
-          history.pushState({}, '', link.href);
+        if (window.history.pushState) {
+          window.history.pushState({}, '', link.href);
         }
-        self.ajax({xhr: true}, function(data) {self.callback(data)}, 'get', link.href);
+        self.ajax({xhr: true}, function(data) {self.callback(data);}, 'get', link.href);
       });
 
     });
-  };
+  }
 
   function callback(data) {
     var div = document.createElement('div'),
@@ -49,7 +51,7 @@ define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll']
     target.innerHTML = div.innerHTML;
     garhammar.initComponents(target);
     smoothScroll.animateScroll(null, '#main');
-  };
+  }
 
 
   return form;

@@ -109,7 +109,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     });
 
     return map;
-  }
+  };
 
 
   function onEvent(eventName) {
@@ -134,7 +134,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
       if (elem.classList.contains('clone')) {
         return;
       }
-      self.wrapperElem.removeChild(elem)
+      self.wrapperElem.removeChild(elem);
     });   
   }
 
@@ -173,7 +173,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
           }
           if (currentPoint.line === route.path.line.CURVE) {
             path = self.getCurvedPath(currentPoint, nextPoint);
-            shadow = self.getCurvedPath(currentPoint, nextPoint, .2);
+            shadow = self.getCurvedPath(currentPoint, nextPoint, 0.2);
             shadowElem = self.container.append('svg:path')
               .attr('d', shadow)
               .attr('class', 'route shadow')
@@ -198,7 +198,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     }
     step(0);
 
-  };
+  }
 
   function addMarkerTooltipListener(currentPoint) {
     var self = this;
@@ -211,7 +211,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     coordinates           = self.convertCoordinates(currentPoint);
     markerTooltip         = markerTooltipWrapper.querySelector('.question');
     if (currentPoint.tooltipPos === 'left') {
-      markerTooltip.classList.add('left')
+      markerTooltip.classList.add('left');
       markerTooltip.style.left = coordinates[0] - (3 * markerTooltipOffsetX) + 'px';
     } else {
       markerTooltip.style.left = coordinates[0] + markerTooltipOffsetX + 'px';
@@ -280,7 +280,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     var initWidth    = parseInt(this.graphElem.getAttribute('data-init-width'), 10);
     var initHeight   = parseInt(this.graphElem.getAttribute('data-init-height'), 10);
     var aspect       = initWidth / initHeight;
-    var parentWidth  = parent.offsetWidth - parseInt(getComputedStyle(parent, null).getPropertyValue('padding-right'), 10) - parseInt(getComputedStyle(parent, null).getPropertyValue('padding-left'), 10);
+    var parentWidth  = parent.offsetWidth - parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-right'), 10) - parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-left'), 10);
     var outerWidth   = Math.max(this.options.minWidth, Math.min(this.options.maxWidth, parentWidth));
     var outerHeight  = outerWidth / aspect;
     this.graphElem.setAttribute('width', outerWidth);

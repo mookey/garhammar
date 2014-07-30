@@ -1,3 +1,5 @@
+'use strict';
+
 define(['utils/utils'], function(utils) {
 
   var Base = function() {
@@ -6,7 +8,7 @@ define(['utils/utils'], function(utils) {
       return {
         name  : this.view.getAttribute('data-component'),
         id    : this.view.getAttribute('data-id')
-      }
+      };
     };
 
     this.clearErrors = function(context) {
@@ -16,7 +18,7 @@ define(['utils/utils'], function(utils) {
       });
       utils.each(c.querySelectorAll('.js-abs-error'), function(elem) {
         elem.parentNode.removeChild(elem);
-      })
+      });
     };
 
     this.ajax = function(data, callback, type, url) {
@@ -39,14 +41,14 @@ define(['utils/utils'], function(utils) {
       }
       form.addEventListener('submit', function(ev) {
         ev.preventDefault();
-        self.ajax(new FormData(form), function(data) {self.callback(data)}, form.method, form.action);
+        self.ajax(new FormData(form), function(data) {self.callback(data);}, form.method, form.action);
       });
       utils.each(self.view.querySelectorAll('input, textarea'), function(input) {
         input.addEventListener('focus', function(ev) {
           self.clearErrors(this.parentNode);
         });
       });
-    }
+    };
 
     this.callback = function(data) {
       var div = document.createElement('div'),

@@ -1,3 +1,5 @@
+'use strict';
+
 define(['d3'], function(d3) {
 
   var route  = route || {};
@@ -6,15 +8,16 @@ define(['d3'], function(d3) {
 
   route.path.line = {
     STRAIGHT : 0,
-    CURVE    : 1
-  }
+    CURVE    : 1,
+    NONE     : 2
+  };
 
   route.path.markers = {};
   route.path.markers.type = {
     REGULAR : 0,
     PULSE : 1,
     NONE  : 2
-  }
+  };
   
   var Base = function() {
     
@@ -22,12 +25,12 @@ define(['d3'], function(d3) {
       return {
         name  : this.view.getAttribute('data-component'),
         id    : this.view.getAttribute('data-id')
-      }
+      };
     };
 
     this.convertCoordinates = function(point) {
       return this.projection([point.coordinates[1], point.coordinates[0]]);
-    }
+    };
 
     this.getStraightPath = function(pointStart, pointEnd) {
       var startPointCoordinates = this.convertCoordinates(pointStart);
@@ -55,7 +58,7 @@ define(['d3'], function(d3) {
         isNegativeX ? startPointCoordinates[0] + x2 : startPointCoordinates[0] - x2,
         isNegativeY ? startPointCoordinates[1] + y2 : startPointCoordinates[1] - y2
       ];
-        var offset = o || .4;
+        var offset = o || 0.4;
         var normalVectorLength = hypotenuse * offset;
         var x3 = Math.cos(beta) * normalVectorLength;
         var y3 = Math.sin(beta) * normalVectorLength;
@@ -89,8 +92,8 @@ define(['d3'], function(d3) {
 
     this.animate = function(pathElem, transitionTime) {
       pathElem
-        .attr("stroke-dasharray", function() { return this.getTotalLength() + ' ' + this.getTotalLength()})
-        .attr("stroke-dashoffset", function() { return this.getTotalLength(); })
+        .attr("stroke-dasharray", function() { return this.getTotalLength() + ' ' + this.getTotalLength();})
+        .attr("stroke-dashoffset", function() { return this.getTotalLength();})
         .transition()
         .duration(transitionTime)
         .ease("linear")
@@ -128,7 +131,7 @@ define(['d3'], function(d3) {
           .duration(2000)
           .ease("linear")
           .attr('r', 12)
-          .style('stroke-width', 5)
+          .style('stroke-width', 5);
       }
       return marker;
     };
@@ -136,7 +139,7 @@ define(['d3'], function(d3) {
     this.createMap = function(graphElem, options) {
       var self         = this;
       var parent       = graphElem.parentNode;
-      var parentWidth  = parent.offsetWidth - parseInt(getComputedStyle(parent, null).getPropertyValue('padding-right'), 10) - parseInt(getComputedStyle(parent, null).getPropertyValue('padding-left'), 10);
+      var parentWidth  = parent.offsetWidth - parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-right'), 10) - parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-left'), 10);
       var initWidth    = parseInt(graphElem.getAttribute('data-init-width'), 10);
       var initHeight   = parseInt(graphElem.getAttribute('data-init-height'), 10);
       var aspect       = initWidth / initHeight;
@@ -172,11 +175,11 @@ define(['d3'], function(d3) {
         projection  : projection
       };
 
-    }
-  }
+    };
+  };
 
   return {
     Base  : Base,
     route : route
-  }
+  };
 });

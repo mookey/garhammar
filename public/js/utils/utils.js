@@ -14,11 +14,11 @@ define([], function() {
 
   utils.getFirstChild = function(el) {
     var firstChild = el.firstChild;
-    while(firstChild != null && firstChild.nodeType == 3){ // skip TextNodes
+    while(firstChild !== null && firstChild.nodeType === 3){ // skip TextNodes
       firstChild = firstChild.nextSibling;
     }
     return firstChild;
-  }
+  };
 
   utils.each = function(elems, callback) {
     var i   = 0,

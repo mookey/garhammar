@@ -41,21 +41,26 @@ module.exports = function(grunt) {
 
     
     jshint: {
-      files: ['public/js/*.js', 'server/**/*.js'],
+      files: ['public/js/**/*.js', 'server/**/*.js'],
       options: {
         'force'         : true,
         'globalstrict'  : true,
         'node'          : true,
-        globals: {
+        'validthis'     : true,
+        'globals' : {
           'window'      : true,
           'Handlebars'  : true,
           'document'    : true,
           'location'    : true,
           'requirejs'   : true,
           'define'      : true,
-          'log'         : true
+          'l'           : true,
+          'garhammar'   : true,
+          'XMLHttpRequest' : true,
+          'FormData'    : true,
+          'google'      : false
         },
-        ignores : ['public/js/libs/*.js', 'public/js/templates/compiled_templates.js']
+        ignores : ['public/js/libs/**/*.js', 'public/js/templates/compiled_templates.js']
       }
     },
     
@@ -92,7 +97,11 @@ module.exports = function(grunt) {
               requireLib : 'libs/requirejs/require'
            },
            include : [
-              'requireLib'
+              'requireLib',
+              'components/sidebar',
+              'components/tabs',
+              'components/code/maps/route',
+              'components/code/maps/google'
            ]
         }
       }

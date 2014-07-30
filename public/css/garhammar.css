@@ -1872,6 +1872,14 @@ body {
   height: 400px;
 }
 
+.map-buttons {
+  margin: 10px 20px 20px 0;
+  text-align: center;
+}
+.map-buttons button {
+  margin-right: 30px;
+}
+
 .alert {
   border: 3px solid #8ed378;
   color: #469c2b;
@@ -1981,6 +1989,11 @@ svg .route.shadow {
 }
 svg .graph-tooltip {
   cursor: pointer;
+}
+svg .step {
+  stroke-width: 5px;
+  stroke-opacity: .3;
+  stroke: blue;
 }
 
 .code-route-wrapper {

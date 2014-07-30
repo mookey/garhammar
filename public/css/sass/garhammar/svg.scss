@@ -34,6 +34,11 @@ svg {
   .graph-tooltip {
     cursor: pointer;
   }
+  .step {
+    stroke-width: 5px;
+    stroke-opacity: .3;
+    stroke: blue;
+  }
 }
 
 .code-route-wrapper {
