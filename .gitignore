@@ -2,3 +2,4 @@ node_modules
 .sass-cache
 public/js/libs
 public/dist/*
+public/js/templates/compiled_templates.js
