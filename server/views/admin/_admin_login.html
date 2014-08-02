@@ -1,0 +1,28 @@
+<div class="login js-component" data-component="admin/login" data-template="_admin_login">
+  <div class="row">
+    <div class="col">
+      <h1>Login</h1>
+      {{> _alert alert}}
+      <form
+        method="post"
+        action="/admin/login"
+        enctype="multipart/form-data"
+      >
+        <div class="input">
+          <label>Username:<br/>
+            <input type="text" name="username" value="{{username}}" {{#if errors.username}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.username}}
+          </label>
+        </div>
+        <div class="input top-10">
+          <label>Password:<br/>
+            <input type="password" name="password">
+          </label>
+        </div>
+        <div class="top-10">
+          <input type="submit" class="button" value="Send">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

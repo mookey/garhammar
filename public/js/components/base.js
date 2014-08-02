@@ -24,9 +24,7 @@ define(['utils/utils'], function(utils) {
     this.ajax = function(data, callback, type, url) {
       var oReq = new XMLHttpRequest();
       oReq.open(type, url , true);
-      if (data.xhr) {
-        oReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      }
+      oReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
       oReq.onload = function(ev) {
         callback(this);
       };

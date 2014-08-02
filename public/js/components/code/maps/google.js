@@ -12,22 +12,22 @@ define(['d3', 'utils/utils', 'components/code/maps/maps_base', 'async!http://map
         coordinates : [59.325600, 18.069920],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.NONE,
-        // tooltip     : 'Stockholm, the start of our journey.',
+        tooltip     : 'Stockholm, the start of our journey.',
         animeTime   : 300
       },
       {
         coordinates : [59.325600, 18.069920],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        // tooltip     : 'Madrid, next stop Valencia.',
-        // tooltipPos  : 'left',
+        tooltip     : 'Madrid, next stop Valencia.',
+        tooltipPos  : 'left',
         animeTime   : 300
       },
       {
         coordinates : [59.326710, 18.068603],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.STRAIGHT,
-        // tooltip     : 'Madrid, next stop Valencia.',
+        tooltip     : 'Madrid, next stop Valencia.',
         // tooltipPos  : 'left',
         animeTime   : 300
       }
@@ -106,7 +106,7 @@ define(['d3', 'utils/utils', 'components/code/maps/maps_base', 'async!http://map
     var markerTooltipOffsetX = 16;
     var markerTooltipOffsetY = -17;
     var coordinates;
-    markerTooltipWrapper  = self.wrapperElem.querySelector('.clone.code-route-tooltip-marker').cloneNode(true);
+    markerTooltipWrapper  = self.wrapperElem.querySelector('.clone.code-google-map-tooltip-marker').cloneNode(true);
     coordinates           = self.convertCoordinates(currentPoint);
     markerTooltip         = markerTooltipWrapper.querySelector('.question');
     if (currentPoint.tooltipPos === 'left') {

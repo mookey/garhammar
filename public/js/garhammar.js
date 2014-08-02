@@ -57,7 +57,24 @@ garhammar.initComponents = function(ctx) {
 
   require(['utils/utils'], function(utils) {
     utils.each(scope.querySelectorAll('.js-component'), requireComponent);
+    utils.each(scope.querySelectorAll('.js-close'), function(elem) { addCloseListener(utils, elem) });
   });
+
+  function addCloseListener(utils, component) {
+    component.addEventListener('click', function(ev) {
+      ev.preventDefault();
+      var wrapper = utils.findParentBySelector(this, '.js-close-wrapper');
+      wrapper.classList.add('hide');
+    });
+  }
+
+    // components = [];
+    // components = scope.querySelectorAll('.js-close');
+    // len = components.length;
+    // i = 0;
+    // for (; i < len; i++) {
+    //   addCloseListener(utils, components[i]);
+    // }
 
   // var scope       = ctx || document,
   //     components  = scope.querySelectorAll('.js-component'),
@@ -89,13 +106,7 @@ garhammar.initComponents = function(ctx) {
   //   }
   // });
 
-  // function addCloseListener(utils, component) {
-  //   component.addEventListener('click', function(ev) {
-  //     ev.preventDefault();
-  //     wrapper = utils.findParentBySelector(this, '.js-close-wrapper');
-  //     wrapper.classList.add('hide');
-  //   });
-  // }
+
 
   // function addReadMoreListener(utils, component) {
   //   component.addEventListener('click', function(ev) {
@@ -123,12 +134,6 @@ garhammar.initComponents = function(ctx) {
       return;
     }
     require(['components/' + name], function(component) {
-
-      // If there supposed to be only one instance of this
-      // component and it is alreade initialized - return
-/*      if (garhammar.components[name] && !id) {
-        return;
-      }*/
 
       if (!garhammar.components[name]) {
         garhammar.components[name] = {};

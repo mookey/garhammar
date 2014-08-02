@@ -39,6 +39,59 @@ module.exports = function(grunt) {
       }
     },
 
+    image: {
+      dynamic: {
+        options: {
+          pngquant: true,
+          optipng: true,
+          advpng: true,
+          zopflipng: true,
+          pngcrush: true,
+          pngout: true,
+          jpegtran: true,
+          jpegRecompress: true,
+          jpegoptim: true,
+          gifsicle: true,
+          svgo: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'public/img', 
+          src: ['**/*.{png,jpg,gif,svg}'],
+          dest: 'public/dist/tmp/'
+        }]
+      }
+    },
+
+    responsive_images: {
+        myTask: {
+          options: {
+            engine : 'im',
+            sizes: [{
+              name : 'small',
+              quality : 70,
+              width : 300
+            },
+            {
+              name : 'medium',
+              quality : 70,
+              width : 640
+            },
+            {
+              name : 'large',
+              quality : 70,
+              width: 960
+            }]
+          },
+          files: [{
+            expand: true,
+            src: ['**.{jpg,gif,png}'],
+            cwd: 'public/dist/tmp/',
+            dest: 'public/dist/img/'
+          }]
+        }
+      },
+
     
     jshint: {
       files: ['public/js/**/*.js', 'server/**/*.js'],
@@ -112,6 +165,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-image');
+  grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-handlebars-compiler');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -123,10 +178,10 @@ module.exports = function(grunt) {
           assets: ['public/dist/css/garhammar.min.css', 'public/dist/css/admin.min.css', 'public/dist/js/requirejs.min.js'],
           grepFiles: ['server/views/site/layouts/index.html', 'server/views/require_conf.html']
       });
-
-      var cb = this.async(); // grunt async callback
+      var cb = this.async();
       versionInstance.run(cb);
   });
-  grunt.registerTask('default', ['clean', 'sass', 'copy', 'jshint', 'handlebars', 'requirejs', 'version-assets']);
+  grunt.registerTask('default', ['clean', 'sass', 'copy', 'image', 'responsive_images', 'jshint', 'handlebars', 'requirejs', 'version-assets']);
+  grunt.registerTask('images', ['image', 'responsive_images']);
 
 };

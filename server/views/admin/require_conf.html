@@ -1,0 +1,17 @@
+<script>
+  var require = {
+    paths : {
+      "handlebars"    : "libs/handlebars/handlebars.runtime",
+      "smoothScroll"  : "libs/smooth-scroll/dist/js/smooth-scroll.min"
+    },
+    shim: {
+      "handlebars" : {
+        exports: 'Handlebars'
+      },
+      "smoothScroll" : {
+        exports: 'smoothScroll'
+      }
+    }
+  };
+</script>
+<script data-main="/js/garhammar.js" src="/js/libs/requirejs/require.js"></script>

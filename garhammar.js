@@ -3,6 +3,7 @@ var express = require('express'),
 
 require('./server/config/config.js')(app);
 require('./server/controllers/routes.js')(app);
+require('./server/controllers/admin.js')(app);
 require('./server/config/errors.js')(app);
 
 app.listen(3033);

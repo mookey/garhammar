@@ -14,6 +14,17 @@ module.exports = function(app) {
 
   app.get('/styles', function (req, res) {
     req.locals.template = '_styles';
+    req.locals.firstAlert = { 
+      isError : false,
+      message : 'Saved!'
+    };
+    req.locals.secondAlert = { 
+      isError : true,
+      message : 'Error!'
+    };
+    req.locals.tooltipError = {
+      message : 'Email must be supplied'
+    };
     r(req, res);
   });
 

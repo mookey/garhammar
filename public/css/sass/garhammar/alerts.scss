@@ -2,6 +2,7 @@
   border: 3px solid $green-lighter;
   color: $green;
   line-height: 32px;
+  margin-bottom: 10px;
   .mark {
     padding: 4px;
     font-size: 30px;
@@ -12,7 +13,6 @@
   .alert-text {
     margin-left: 10px;
     color: $green;
-    text-transform: uppercase;
   }
   a {
     float: right;
