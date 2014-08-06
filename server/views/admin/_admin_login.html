@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col">
       <h1>Login</h1>
-      {{> _alert alert}}
+      <div class="top-10"> 
+        {{> _alert alert}}
+      </div>
       <form
         method="post"
         action="/admin/login"
@@ -10,7 +12,7 @@
       >
         <div class="input">
           <label>Username:<br/>
-            <input type="text" name="username" value="{{username}}" {{#if errors.username}}class="error js-error"{{/if}}>
+            <input type="text" name="username" value="{{fields.username}}" {{#if errors.username}}class="error js-error"{{/if}}>
             {{> _tooltip_error errors.username}}
           </label>
         </div>

@@ -1,11 +1,26 @@
 module.exports = function(grunt) {
 
+  var dimensions = {
+    XS  : 200,
+    S   : 320,
+    M   : 640,
+    L   : 840,
+    XL  : 1080
+  };
+
   grunt.initConfig({
     
     pkg : grunt.file.readJSON('package.json'),
     
-    clean : ['public/dist/*', 'public/js/templates/compiled_templates.js'],
-
+    clean : {
+      build : [
+        'public/dist/*', 
+        'public/js/templates/compiled_templates.js'
+      ],
+      images : [
+        'public/img/org/tmp/*'
+      ]
+    },
 
     sass: {
       dev: {
@@ -36,30 +51,32 @@ module.exports = function(grunt) {
         dest: 'public/dist/fonts',
         flatten: true,
         filter: 'isFile'
+      },
+      images: {
+        expand: true,
+        src: ['public/img/org/favicon.ico', 'public/img/org/ajax-loader.gif'],
+        dest: 'public/img/dist/',
+        flatten: true,
+        filter: 'isFile'
       }
     },
 
     image: {
       dynamic: {
-        options: {
-          pngquant: true,
-          optipng: true,
-          advpng: true,
-          zopflipng: true,
-          pngcrush: true,
-          pngout: true,
-          jpegtran: true,
-          jpegRecompress: true,
-          jpegoptim: true,
-          gifsicle: true,
-          svgo: true
-        },
         files: [{
           expand: true,
-          cwd: 'public/img', 
-          src: ['**/*.{png,jpg,gif,svg}'],
-          dest: 'public/dist/tmp/'
+          cwd: 'public/img/org', 
+          src: ['**/*.{png,jpg,svg}'],
+          dest: 'public/img/org/tmp/'
         }]
+      },
+      prod: {
+        files: [{
+          expand: true,
+          cwd: 'public/img/org/tmp', 
+          src: ['**/*.{png,jpg,svg}'],
+          dest: 'public/img/org/tmp/'
+        }]       
       }
     },
 
@@ -68,26 +85,36 @@ module.exports = function(grunt) {
           options: {
             engine : 'im',
             sizes: [{
-              name : 'small',
-              quality : 70,
-              width : 300
+              name : 'xs',
+              quality : 80,
+              width : dimensions.XS
             },
             {
-              name : 'medium',
-              quality : 70,
-              width : 640
+              name : 's',
+              quality : 80,
+              width : dimensions.S
             },
             {
-              name : 'large',
-              quality : 70,
-              width: 960
+              name : 'm',
+              quality : 80,
+              width : dimensions.M
+            },
+            {
+              name : 'l',
+              quality : 80,
+              width: dimensions.L
+            },
+            {
+              name : 'xl',
+              quality : 80,
+              width: dimensions.XL
             }]
           },
           files: [{
             expand: true,
-            src: ['**.{jpg,gif,png}'],
-            cwd: 'public/dist/tmp/',
-            dest: 'public/dist/img/'
+            src: ['**.{jpg,png}'],
+            cwd: 'public/img/org/tmp/',
+            dest: 'public/img/dist/'
           }]
         }
       },
@@ -131,8 +158,14 @@ module.exports = function(grunt) {
 
 
     watch: {
-      files: ['server/**/*.js', 'server/views/*.html', 'public/css/**/*.scss', 'public/js/**/*.js'],
-      tasks: ['handlebars', 'sass']
+      dev : {
+        files: ['server/**/*.js', 'server/views/*.html', 'public/css/**/*.scss', 'public/js/**/*.js'],
+        tasks: ['handlebars', 'sass']
+      },
+      prod : {
+        files: ['public/img/trigger.js'],
+        tasks: ['image:prod', 'responsive_images', 'clean:images']
+      }
     },
 
 
@@ -154,7 +187,8 @@ module.exports = function(grunt) {
               'components/sidebar',
               'components/tabs',
               'components/code/maps/route',
-              'components/code/maps/google'
+              'components/code/maps/google',
+              'components/pics/pics'
            ]
         }
       }
@@ -181,7 +215,7 @@ module.exports = function(grunt) {
       var cb = this.async();
       versionInstance.run(cb);
   });
-  grunt.registerTask('default', ['clean', 'sass', 'copy', 'image', 'responsive_images', 'jshint', 'handlebars', 'requirejs', 'version-assets']);
-  grunt.registerTask('images', ['image', 'responsive_images']);
+  grunt.registerTask('default', ['clean:build', 'sass', 'copy', 'jshint', 'handlebars', 'requirejs', 'version-assets']);
+  grunt.registerTask('images', ['clean:images', 'image:dynamic', 'responsive_images', 'copy:images', 'clean:images']);
 
 };

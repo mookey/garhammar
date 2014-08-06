@@ -11,12 +11,12 @@ define(['templates/templates', 'components/base', 'utils/utils'], function(templ
     f.addTabsListener = addTabsListener;
     f.initContext     = initContext;
     f.initLinks();
+    f.initContext();
     return f;
   };
 
   function initLinks() {
     this.addTabsListener();
-    this.initContext();
   }
 
   function initContext() {

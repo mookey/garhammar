@@ -5,13 +5,16 @@ var express       = require('express'),
     compress      = require('compression')(),
     session       = require('express-session'),
     MongoStore    = require('connect-mongo')(session),
-    cookieParser  = require('cookie-parser');
+    cookieParser  = require('cookie-parser'),
+    passport      = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    bcrypt        = require('bcrypt'),
+    users         = require('../models/users.js');
 
 module.exports = function(app) {
 
   switch (process.env.NODE_ENV) {
     case 'production':
-      app.use(compress);
       setDefaults(app);
       break;
     case 'development':
@@ -24,8 +27,10 @@ module.exports = function(app) {
 
   function setDefaults(app) {
       var hbs;
+      var maxAge = 1000 * 60 * 60 * 24 * 365;
       app.enable('strict routing');
       app.enable('case sensitive routing');
+      app.use(compress);
       app.use(addAppObject);
       app.set('views', __dirname + '/../views');
       hbs = exphbs.create({
@@ -43,23 +48,26 @@ module.exports = function(app) {
             db    : 'garhammar'
           })
         }));
-      app.use(express.static(__dirname + '/../../public', { maxAge: 31556926 }));
+      app.use(passport.initialize());
+      app.use(passport.session());
+      app.use(express.static(__dirname + '/../../public', { maxAge: maxAge }));
   }
 
   function addAppObject(req, res, next) {
     req.locals          = {};
-    req.locals.status   = {};
+    req.locals.alert    = {};
     req.locals.errors   = {};
     req.locals.view     = {};
-    req.locals.toggleProdSettings = !shouldToggleDev(req.query);
+    req.locals.fields   = {};
+    req.locals.toggleProdSettings = !shouldToggleDev(req);
     next();
   }
 
-  function shouldToggleDev(query) {
-    if (query.devMode) {
+  function shouldToggleDev(req) {
+    if (req.param('devMode') === '1') {
       return true;
     }
-    if (query.prodMode) {
+    if (req.param('prodMode') === '1') {
       return false;
     }
     return !isProd();
@@ -70,3 +78,34 @@ module.exports = function(app) {
   }
 
 };
+
+passport.serializeUser(function(user, done) {
+  done(null, user.username);
+});
+
+passport.deserializeUser(function(username, done) {
+  users.findByUsername(username, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    users.findByUsername(username, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+          return done(null, false, {
+              messages : ['Incorrect username or password']
+          });
+        }
+        bcrypt.compare(password, user.password, function(err, res) {
+          if (res) {
+            return done(null, user);
+          }
+          return done(null, false, {
+              messages : ['Incorrect username or password']
+          });
+        });
+    });
+  }
+));

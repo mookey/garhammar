@@ -8,7 +8,7 @@ require('./server/config/errors.js')(app);
 
 app.listen(3033);
 
-log = function(first, second) {
+l = function(first, second) {
   if (second) {
     console.log(first, second);
   } else {

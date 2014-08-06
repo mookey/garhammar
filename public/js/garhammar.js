@@ -9,16 +9,18 @@ function l(a, b) {
 }
 
 var garhammar = garhammar || {};
-garhammar.listeners = {};
+garhammar.listeners = garhammar.listeners || {};
 garhammar.components = garhammar.components || {};
 
-window.addEventListener('resize', function(event){
-  garhammar.componentsEventDispatcher('resize');
-});
+
+garhammar.triggeredEvent = function(ev) {
+  garhammar.componentsEventDispatcher(ev.type);
+};
 
 garhammar.registerListener = function(eventName, listenerName, listenerId) {
   if (!this.listeners[eventName]) {
     this.listeners[eventName] = [];
+    window.addEventListener(eventName, garhammar.triggeredEvent);
   }
   this.listeners[eventName].push({
     componentName : listenerName,
@@ -28,6 +30,7 @@ garhammar.registerListener = function(eventName, listenerName, listenerId) {
 
 garhammar.removeListeners = function(eventName) {
   delete this.listeners[eventName];
+  window.removeEventListener(eventName, garhammar.triggeredEvent);
 };
 
 garhammar.componentsEventDispatcher = function(eventName) {
@@ -57,7 +60,7 @@ garhammar.initComponents = function(ctx) {
 
   require(['utils/utils'], function(utils) {
     utils.each(scope.querySelectorAll('.js-component'), requireComponent);
-    utils.each(scope.querySelectorAll('.js-close'), function(elem) { addCloseListener(utils, elem) });
+    utils.each(scope.querySelectorAll('.js-close'), function(elem) { addCloseListener(utils, elem); });
   });
 
   function addCloseListener(utils, component) {

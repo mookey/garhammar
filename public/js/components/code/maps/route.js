@@ -76,7 +76,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
       projection  : {
         rotate    : [-18, -53, 10]
       },
-      minWidth : 286,
+      minWidth : 240,
       maxWidth : 1000
     };
     map.view        = aView;

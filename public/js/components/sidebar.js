@@ -21,6 +21,9 @@ define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll']
       link.addEventListener('click', function(ev) {
         var link = this;
         garhammar.removeListeners('resize');
+        garhammar.removeListeners('load');
+        garhammar.removeListeners('scroll');
+
         if (link.href.indexOf('logout') > -1) {
           return;
         }

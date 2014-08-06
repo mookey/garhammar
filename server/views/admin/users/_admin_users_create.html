@@ -1,0 +1,54 @@
+<div class="js-component" data-component="admin/users/create" data-template="_admin_users_create">
+  <div class="row">
+    <div class="col">
+      <h2>Create</h2>
+      <div class="top-20"> 
+        {{> _alert alert}}
+      </div>
+      <form
+        method="post"
+        action="/admin/users/create"
+        enctype="multipart/form-data"
+      >
+        <div class="input">
+          <label>Username:<br/>
+            <input type="text" name="username" value="{{fields.username}}" {{#if errors.username}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.username}}
+          </label>
+        </div>
+        <div class="input top-10">
+          <label>Email:<br/>
+            <input type="text" name="email" value="{{fields.email}}" {{#if errors.email}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.email}}
+          </label>
+        </div>
+        <div class="input top-10">
+          <label>Password:<br/>
+            <input type="password" name="password" value="{{fields.password}}" {{#if errors.password}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.password}}
+          </label>
+        </div>
+        <div class="input top-10">
+          <label>Confirm password:<br/>
+            <input type="password" name="confirm_password" value="{{fields.confirm_password}}" {{#if errors.confirm_password}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.confirm_password}}
+          </label>
+        </div>
+        <h3>Rights</h3>
+        <div class="input top-10">
+          <label>
+            <input type="radio" name="permission" value="0" checked="checked"/> regular
+          </label>
+          <br/>
+          <label>
+            <input type="radio" name="permission" value="10" /> admin
+          </label>
+          <br/>
+        </div>
+        <div class="top-20">
+          <input type="submit" class="button" value="Create">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

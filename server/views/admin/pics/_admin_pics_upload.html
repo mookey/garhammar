@@ -1,0 +1,25 @@
+<div class="js-component" data-component="admin/pics/upload" data-template="_admin_pics_upload">
+  <div class="row">
+    <div class="col">
+      <h2>Upload</h2>
+      <div class="top-20"> 
+        {{> _alert alert}}
+      </div>
+      <form
+        method="post"
+        action="/admin/pics/upload"
+        enctype="multipart/form-data"
+      >
+        <div class="input">
+          <label>File:<br/>
+            <input type="file" name="name" value="{{fields.name}}" {{#if errors.name}}class="error js-error"{{/if}}>
+            {{> _tooltip_error errors.name}}
+          </label>
+        </div>
+        <div class="top-20">
+          <input type="submit" class="button" value="Upload">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

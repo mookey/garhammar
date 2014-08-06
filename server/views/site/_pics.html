@@ -1,0 +1,7 @@
+<div class="pics js-component" data-component="pics/pics" data-template="_pic">
+  {{#each pictures}}
+    <div class="placeholder {{#if vertical}}vertical{{/if}}">
+      <img class="spinner" src="/img/dist/ajax-loader.gif" alt="{{name}}" data-echo="/img/dist/{{filename}}">
+    </div>
+  {{/each}}
+</div>
