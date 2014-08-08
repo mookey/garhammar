@@ -12,11 +12,11 @@ var async       = require('async');
 module.exports = function(app) {
 
   var dimensions = {
-    XS  : 200,
-    S   : 320,
-    M   : 640,
-    L   : 840,
-    XL  : 1080
+    XS  : 260, // 320 - 40 main padding - 20 placeholder padding
+    S   : 420, // 480 - 40 main padding - 20 placeholder padding
+    M   : 580, // 640 - 40 main padding - 20 placeholder padding
+    L   : 900, // 960 - 40 main padding - 20 placeholder padding
+    XL  : 1020 // 1080 - 40 main padding - 20 placeholder padding
   };
 
   app.get('/admin/pics', function(req, res) {

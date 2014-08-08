@@ -1,11 +1,11 @@
 module.exports = function(grunt) {
 
   var dimensions = {
-    XS  : 200,
-    S   : 320,
-    M   : 640,
-    L   : 840,
-    XL  : 1080
+    XS  : 260, // 320 - 40 main padding - 20 placeholder padding
+    S   : 420, // 480 - 40 main padding - 20 placeholder padding
+    M   : 580, // 640 - 40 main padding - 20 placeholder padding
+    L   : 900, // 960 - 40 main padding - 20 placeholder padding
+    XL  : 1020 // 1080 - 40 main padding - 20 placeholder padding
   };
 
   grunt.initConfig({
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
     handlebars: {
       all: {
         files: {
-            'public/js/templates/compiled_templates.js': 'server/**/_*.html'
+          'public/js/templates/compiled_templates.js': 'server/views/**/_*.html'
         },
         options: {
           exportAMD: true

@@ -97,6 +97,10 @@ legend {
     display: inline;
   }
 
+  div.not-xs {
+    display: block;
+  }
+
   .buttons.not-xs {
     display: inline-block;
   }
@@ -123,6 +127,10 @@ legend {
 
 .top-20 {
   margin-top: 20px;
+}
+
+.bottom-20 {
+  margin-bottom: 20px;
 }
 
 .inline-block {
@@ -1490,9 +1498,6 @@ a {
 a:hover {
   color: black;
 }
-a .icon {
-  margin-right: 5px;
-}
 
 .icon {
   font-size: 24px;
@@ -1618,10 +1623,7 @@ input[type="checkbox"] {
 }
 
 .styles .abs-tooltip-arrow {
-  right: 76px;
-}
-.styles .abs-tooltip {
-  width: 160px;
+  right: 96px;
 }
 
 button,
@@ -1725,12 +1727,16 @@ body {
 }
 
 #main {
-  margin-left: 60px;
   max-width: 1100px;
   min-height: 1100px;
-  padding-top: 30px;
+  padding: 70px 20px 100px 20px;
 }
 
+@media (min-width: 500px) {
+  #main {
+    padding-top: 60px;
+  }
+}
 .col {
   padding-right: 20px;
   box-sizing: border-box;
@@ -1739,6 +1745,7 @@ body {
 @media (min-width: 768px) {
   #main {
     margin-left: 110px;
+    padding-top: 20px;
   }
 
   .col {
@@ -1784,11 +1791,11 @@ body {
   margin: 20px 0 30px 20px;
 }
 .styles .styles-tooltip {
-  padding-top: 205px;
+  padding-top: 190px;
 }
 
 .tabs {
-  padding-right: 20px;
+  /*padding-right: 20px;*/
 }
 .tabs .tab {
   border-top: 1px solid #e5e5e5;
@@ -1883,15 +1890,30 @@ body {
 }
 
 .pics .placeholder {
-  display: inline-block;
+  margin-bottom: 30px;
+  display: block;
   text-align: center;
-  margin: 0 20px 30px 0;
-  vertical-align: top;
-  padding: 10px;
-  box-shadow: 0 0 10px -3px #333;
 }
-.pics .placeholder .spinner {
+.pics .spinner {
+  margin: 0 auto;
   margin-top: 40%;
+}
+.pics img {
+  box-shadow: 0 0 10px -3px #333;
+  border: 10px solid white;
+}
+
+@media (min-width: 500px) {
+  .pics .overview .placeholder {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .pics .placeholder {
+    margin: 0 15px 30px 0;
+  }
+}
+.invisible {
+  visibility: hidden;
 }
 
 .code-google-map {
@@ -1961,25 +1983,46 @@ body {
 }
 
 .sidebar {
-  width: 60px;
-  height: 100%;
+  width: 100%;
   position: fixed;
   box-sizing: border-box;
-  padding: 47px 0 0 8px;
+  box-shadow: 0 0 10px -3px #333;
+  background-color: white;
+  z-index: 10;
+}
+.sidebar li {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
 }
 .sidebar a {
+  padding: 10px 0;
   display: inline-block;
-  margin-bottom: 10px;
 }
 .sidebar .icon {
   font-size: 30px;
 }
+.sidebar .menu-link {
+  display: block;
+}
 
+@media (min-width: 500px) {
+  .sidebar .menu-link {
+    display: inline-block;
+  }
+}
 @media (min-width: 768px) {
   .sidebar {
+    height: 100%;
     width: 110px;
+    padding: 47px 0 0 8px;
+    box-shadow: none;
   }
   .sidebar .icon {
     font-size: 24px;
+  }
+  .sidebar li {
+    width: 100%;
+    text-align: left;
   }
 }

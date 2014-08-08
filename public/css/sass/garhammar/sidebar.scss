@@ -1,23 +1,47 @@
 .sidebar {
-  width: 60px;
-  height: 100%;
+  width: 100%;
   position: fixed;
   box-sizing: border-box;
-  padding: 47px 0 0 8px;
-  a {
+  box-shadow : 0 0 10px -3px #333;
+  background-color: $white;
+  z-index: 10;
+  li {
     display: inline-block;
-    margin-bottom: 10px;
+    width: 20%;
+    text-align: center;
+  }
+  a {
+    padding: 10px 0;
+    display: inline-block;
   }
   .icon {
     font-size: 30px;
+  }
+  .menu-link {
+    display: block;
+  }
+}
+
+@media (min-width: $screen-s) {
+  .sidebar {
+    .menu-link {
+      display: inline-block;
+    }
   }
 }
 
 @media (min-width: $screen-md) {
   .sidebar {
+    height: 100%;
     width: 110px;
+    padding: 47px 0 0 8px;
+    box-shadow: none;
     .icon {
       font-size: 24px;
+    }
+    li {
+      width: 100%;
+      text-align: left;
     }
   }
 }

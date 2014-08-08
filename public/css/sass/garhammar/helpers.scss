@@ -18,6 +18,9 @@ $screen-l : 992px;
   span.not-xs {
     display: inline;
   }
+  div.not-xs {
+    display: block;
+  }
   .buttons.not-xs {
     display: inline-block;
   }
@@ -43,6 +46,10 @@ $screen-l : 992px;
 
 .top-20 {
   margin-top: 20px;
+}
+
+.bottom-20 {
+  margin-bottom: 20px;
 }
 
 .inline-block {

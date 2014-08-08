@@ -5,11 +5,11 @@ var pics        = require('../models/pics');
 module.exports = function(app) {
 
   var dimensions = {
-    XS  : 200,
-    S   : 320,
-    M   : 640,
-    L   : 840,
-    XL  : 1080
+    XS  : 280,
+    S   : 440,
+    M   : 600,
+    L   : 920,
+    XL  : 1040
   };
 
   app.get('/', function (req, res) {
@@ -22,109 +22,81 @@ module.exports = function(app) {
     r(req, res);
   });
 
-  function getPicDimensions(w, pic) {
+  function getPicDimensions(w, pic, dpr, isOverview) {
+
+    if (isOverview) {
+      return { 
+        width   : pic.xs.width,
+        height  : pic.xs.height,
+        quality : dpr > 1 ? 's' : 'xs' 
+      };
+    }
 
     if (w < dimensions.S) {
       return { 
-        width: pic.xs.width,
-        height: pic.xs.height
+        width   : pic.xs.width,
+        height  : pic.xs.height,
+        quality : dpr > 1 ? 's' : 'xs' 
       };
     }
     if (w < dimensions.M) {
       return { 
-        width: pic.s.width,
-        height: pic.s.height
+        width   : pic.s.width,
+        height  : pic.s.height,
+        quality : dpr > 1 ? 'm' : 's' 
       };
     }
     if (w < dimensions.L) {
       return { 
-        width: pic.m.width,
-        height: pic.m.height
+        width   : pic.m.width,
+        height  : pic.m.height,
+        quality : dpr > 1 ? 'l' : 'm' 
       };
     }
     if (w < dimensions.XL) {
       return { 
-        width: pic.l.width,
-        height: pic.l.height
+        width   : pic.l.width,
+        height  : pic.l.height,
+        quality : dpr > 1 ? 'xl' : 'l' 
       };
     }
     return { 
-      width: pic.xl.width,
-      height: pic.xl.height
+        width   : pic.xl.width,
+        height  : pic.xl.height,
+        quality : 'xl' 
     };
-  }
-
-  function getSuffix(w, dpr) {
-    if (w > dimensions.XL) {
-      return 'xl';
-    }
-    if (w > dimensions.L) {
-      return (dpr > 1 ? 'xl' : 'l');
-    }
-    if (w > dimensions.M) {
-      if (dpr >= 2) {
-        return 'xl';
-      }
-      if (dpr >= 1.5) {
-        return 'l';
-      }
-      return 'm';
-    }
-    if (w > dimensions.S) {
-      if (dpr >= 3) {
-        return 'xl';
-      }
-      if (dpr >= 2) {
-        return 'l';
-      }
-      if (dpr >= 1.5) {
-        return 'm';
-      }
-      return 's';
-    }
-    if (w > dimensions.XS) {
-      if (dpr >= 3) {
-        return 'm';
-      }
-      if (dpr >= 2) {
-        return 's';
-      }
-      return 'xs';
-    }
-    return 'xs';
   }
 
   app.get('/pics', function (req, res) {
     var dpr;
     var width;
+    var isOverview;
     var dimensions;
-    var suffix;
-    var rotate;
+    var i = 0;
     var pictures = [];
 
     req.locals.template = '_pics';
 
     if (req.xhr) {
       dpr = req.param('dpr');
-      width = req.param('containerWidth');
-      suffix = getSuffix(width, dpr);
+      width = req.param('width');
+      isOverview = req.param('gallery') !== 'true';
 
       pics.getSome(0, 20, function(data) {
         data.pics.forEach(function(pic) {
-          dimensions = getPicDimensions(width, pic);
-          rotate = Math.floor(Math.random()*2) + 1;
-          rotate *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+          dimensions = getPicDimensions(width, pic, dpr, isOverview);
 
           pictures.push({
-            filename  : pic.filename + '-' + suffix + '.' + pic.ext,
+            filename  : pic.filename + '-' + dimensions.quality + '.' + pic.ext,
             name      : pic.name,
             vertical  : pic.vertical,
             desc      : pic.desc,
             tags      : pic.tags,
             width     : dimensions.width,
             height    : dimensions.height,
-            rotate    : rotate
+            no        : i
           });
+          i++;
         });
         req.locals.pictures = pictures;
         r(req, res);
