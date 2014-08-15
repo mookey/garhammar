@@ -1,0 +1,21 @@
+{{#if toggleProdSettings}}
+  <script data-main="/garhammar.js" src="/dist/js/requirejs.admin.min.fa28830d3fa51c581caa353793b5a379.js"></script>
+{{else}}
+  <script>
+    var require = {
+      paths : {
+        "handlebars"    : "libs/handlebars/handlebars.runtime",
+        "smoothScroll"  : "libs/smooth-scroll/dist/js/smooth-scroll.min"
+      },
+      shim: {
+        "handlebars" : {
+          exports: 'Handlebars'
+        },
+        "smoothScroll" : {
+          exports: 'smoothScroll'
+        }
+      }
+    };
+  </script>
+  <script data-main="/js/garhammar.js" src="/js/libs/requirejs/require.js"></script>
+{{/if}}

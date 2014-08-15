@@ -157,8 +157,9 @@ requirejs(
   ['libs/domReady/domReady', 'smoothScroll'],
   function (domReady, smoothScroll) {
     domReady(function () {
-      smoothScroll.init();
+      garhammar.isAdmin = document.getElementById('main').classList.contains('admin');
       garhammar.initComponents();
+      smoothScroll.init();
     });
   }
 );

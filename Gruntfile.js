@@ -140,15 +140,23 @@ module.exports = function(grunt) {
           'FormData'    : true,
           'google'      : false
         },
-        ignores : ['public/js/libs/**/*.js', 'public/js/templates/compiled_templates.js']
+        ignores : ['public/js/libs/**/*.js', 'public/js/templates/*.js']
       }
     },
     
 
     handlebars: {
-      all: {
+      admin : {
         files: {
-          'public/js/templates/compiled_templates.js': 'server/views/**/_*.html'
+          'public/js/templates/compiled_admin_templates.js': ['server/views/admin/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip_error.html']
+        },
+        options: {
+          exportAMD: true
+        }
+      },
+      site: {
+        files: {
+          'public/js/templates/compiled_templates.js': ['server/views/site/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip_error.html']
         },
         options: {
           exportAMD: true
@@ -159,7 +167,7 @@ module.exports = function(grunt) {
 
     watch: {
       dev : {
-        files: ['server/**/*.js', 'server/views/*.html', 'public/css/**/*.scss', 'public/js/**/*.js'],
+        files: ['server/**/*.js', 'server/views/**/*.html', 'public/css/**/*.scss', 'public/js/**/*.js'],
         tasks: ['handlebars', 'sass']
       },
       prod : {
@@ -178,7 +186,7 @@ module.exports = function(grunt) {
            optimize : 'uglify2',
            preserveLicenseComments : false,
            inlineText : true,
-           findNestedDependencies : true,
+           findNestedDependencies : false,
            paths : {
               requireLib : 'libs/requirejs/require'
            },
@@ -188,7 +196,37 @@ module.exports = function(grunt) {
               'components/tabs',
               'components/code/maps/route',
               'components/code/maps/google',
-              'components/pics/pics'
+              'components/pics/pics',
+              'templates/compiled_templates'
+           ]
+        }
+      },
+      admin : {
+        options : {
+           name : 'garhammar',
+           mainConfigFile : 'public/js/admin_conf.js',
+           out : 'public/dist/js/requirejs.admin.min.js',
+           optimize : 'uglify2',
+           preserveLicenseComments : false,
+           inlineText : true,
+           findNestedDependencies : false,
+           paths : {
+              requireLib : 'libs/requirejs/require'
+           },
+          onBuildWrite: function (moduleName, path, contents) {
+                if (moduleName === 'components/tabs' || moduleName === 'components/sidebar') {
+                  return contents.replace("'templates/templates'", "'templates/admin_templates'");
+                }
+                return contents;
+           },
+           include : [
+              'requireLib',
+              'components/sidebar',
+              'components/tabs',
+              'components/admin/pics/pic',
+              'components/admin/pics/pics',
+              'components/admin/pics/upload',
+              'templates/compiled_admin_templates'
            ]
         }
       }
@@ -209,8 +247,8 @@ module.exports = function(grunt) {
       var Version = require("node-version-assets");
       var versionInstance = new Version({
           keepOriginalAndOldVersions : true,
-          assets: ['public/dist/css/garhammar.min.css', 'public/dist/css/admin.min.css', 'public/dist/js/requirejs.min.js'],
-          grepFiles: ['server/views/site/layouts/index.html', 'server/views/require_conf.html']
+          assets: ['public/dist/css/garhammar.min.css', 'public/dist/css/admin.min.css', 'public/dist/js/requirejs.min.js', 'public/dist/js/requirejs.admin.min.js'],
+          grepFiles: ['server/views/site/layouts/index.html', 'server/views/require_conf.html', 'server/views/site/layouts/admin.html', 'server/views/admin/require_admin_conf.html']
       });
       var cb = this.async();
       versionInstance.run(cb);

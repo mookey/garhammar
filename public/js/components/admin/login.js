@@ -1,6 +1,6 @@
 'use strict';
 
-define(['templates/templates', 'components/base'], function(templates, Base) {
+define(['templates/admin_templates', 'components/base'], function(templates, Base) {
   
   var login = {};
 

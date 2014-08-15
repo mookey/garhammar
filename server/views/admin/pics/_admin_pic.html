@@ -1,0 +1,23 @@
+  <div class="placeholder js-component" data-component="admin/pics/pic" data-template="_admin_pic_single" data-id="{{id}}">
+    <form
+      action="/admin/pics/{{id}}"
+      method="post"
+    >
+      {{> _alert}}
+      <img width="{{width}}" height="{{height}}" class="spinner" src="/img/dist/ajax-loader.gif" alt="{{name}}" data-echo="/img/dist/{{filename}}" data-no="{{no}}">
+      <div class="top-10 input">
+        Description:<br/>
+        <textarea>{{desc}}</textarea>
+      </div>
+      <div class="top-10 input">
+        Add tag:<br/>
+        <input type="text" name="tag"/>
+      </div>
+      {{#each tags}}
+        <input class="top-10" name="tag" type="text" value=""/>
+      {{/each}}
+      <div class="top-20">
+        <input type="submit" value="Update">
+      </div>
+    </form>
+  </div>

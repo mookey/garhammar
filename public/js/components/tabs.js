@@ -1,7 +1,7 @@
 'use strict';
 
 define(['templates/templates', 'components/base', 'utils/utils'], function(templates, Base, utils) {
-  
+
   var tabs = {};
 
   tabs.init = function(aView) {

@@ -73,6 +73,7 @@ module.exports = function(app) {
     var isOverview;
     var dimensions;
     var i = 0;
+    var skip = 0;
     var pictures = [];
 
     req.locals.template = '_pics';
@@ -81,11 +82,11 @@ module.exports = function(app) {
       dpr = req.param('dpr');
       width = req.param('width');
       isOverview = req.param('gallery') !== 'true';
+      skip = parseInt(req.param('skip'), 10);
 
-      pics.getSome(0, 20, function(data) {
+      pics.getSome(skip, 20, function(data) {
         data.pics.forEach(function(pic) {
           dimensions = getPicDimensions(width, pic, dpr, isOverview);
-
           pictures.push({
             filename  : pic.filename + '-' + dimensions.quality + '.' + pic.ext,
             name      : pic.name,
@@ -94,7 +95,8 @@ module.exports = function(app) {
             tags      : pic.tags,
             width     : dimensions.width,
             height    : dimensions.height,
-            no        : i
+            no        : i,
+            id        : pic._id
           });
           i++;
         });

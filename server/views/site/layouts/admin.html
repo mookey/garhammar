@@ -4,16 +4,19 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-      <link rel="stylesheet" href="/css/admin.css" type="text/css" />
-      <link href='http://fonts.googleapis.com/css?family=Oswald:400,300|Varela+Round' rel='stylesheet' type='text/css'>
       <title>Admin</title>
-      <link rel="shortcut icon" href="img/favicon.ico" />
+      <link rel="shortcut icon" href="/dist/img/favicon.ico" />
+      {{#if toggleProdSettings}}
+        <link rel="stylesheet" href="/dist/css/admin.min.65afaaeab61297e1760b2205463b57fa.css" type="text/css" />
+      {{else}}
+        <link rel="stylesheet" href="/css/admin.css" type="text/css" />
+      {{/if}}
   </head>
   <body>
       {{> admin/sidebar}}
-      <div id="main">
+      <div id="main" class="admin">
         {{{ body }}}
       </div>
-      {{> admin/require_conf}}
+      {{> admin/require_admin_conf}}
   </body>
 </html>

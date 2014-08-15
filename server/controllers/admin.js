@@ -19,8 +19,14 @@ module.exports = function(app) {
     XL  : 1020 // 1080 - 40 main padding - 20 placeholder padding
   };
 
-  app.get('/admin/pics', function(req, res) {
+  app.post('/admin/pics/:id', function(req, res) {
     req.locals.template = 'pics/_admin_pics';
+    req.locals.alert.pictures = { isError : false, message : 'Saved'};
+    r(req, res);
+  });
+
+  app.get('/admin/pics', function(req, res) {
+    req.locals.template = 'pics/_admin_pic_tabs';
     r(req, res);
   });
 
@@ -171,6 +177,7 @@ module.exports = function(app) {
 
   function r(req, res, status) {
     res.locals.layout = 'admin';
+    res.locals.isAdmin = true;
     if (req.xhr) {
       req.locals.template = req.locals.template.split('/').pop();
       if (!status) {

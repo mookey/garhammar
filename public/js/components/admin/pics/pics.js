@@ -1,6 +1,6 @@
 'use strict';
 
-define(['templates/templates', 'utils/utils'], function(templates, utils) {
+define(['templates/admin_templates', 'utils/utils'], function(templates, utils) {
   
   var pics = {};
 
@@ -15,27 +15,15 @@ define(['templates/templates', 'utils/utils'], function(templates, utils) {
     c.ajax      = ajax;
     c.callback  = callback;
     c.getPictures = getPictures;
-    c.addOverviewListener = addOverviewListener;
     c.getPictures();
-    c.addOverviewListener();
-    garhammar.registerListener('scroll', 'pics/pics');
+    garhammar.registerListener('scroll', 'admin/pics/pics');
     return c;
   };
 
-  function addOverviewListener() {
-    var self = this;
-    utils.each(this.view.querySelectorAll('input'), function(item) {
-      item.addEventListener('change', function() {
-        self.detach();
-        garhammar.registerListener('scroll', 'pics/pics');
-        self.getPictures(false);
-      });
-    });
-  }
 
   function getPictures(shouldAppend) {
     var self = this;
-    var isOverview = !self.view.querySelector('input[name="gallery"]').checked;
+    var isOverview = true;
     var pictureElem = this.view.querySelector('.js-pics');
     var append = shouldAppend || false;
     var images = pictureElem.querySelectorAll('img');
@@ -66,7 +54,7 @@ define(['templates/templates', 'utils/utils'], function(templates, utils) {
 
     pictures = JSON.parse(data.responseText);
     if (!pictures.pictures.length) {
-      this.detach();
+      garhammar.removeListeners('scroll');
       return;
     }
 
@@ -79,6 +67,7 @@ define(['templates/templates', 'utils/utils'], function(templates, utils) {
       inner += this.template(pictures);
       pictureElem.innerHTML = inner;
     }
+    garhammar.initComponents(pictureElem);
     this.render();
   }
 

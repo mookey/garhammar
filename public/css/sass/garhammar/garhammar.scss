@@ -188,6 +188,13 @@ body {
     border: 10px solid $white;    
   }
 }
+.admin {
+  .pics {
+    .placeholder {
+      text-align: left;
+    }
+  }
+}
 
 @media (min-width: $screen-s) {
   .pics {
