@@ -21,10 +21,13 @@ define(['utils/utils'], function(utils) {
       });
     };
 
-    this.ajax = function(data, callback, type, url) {
+    this.ajax = function(data, callback, method, url, headerAddOn) {
       var oReq = new XMLHttpRequest();
-      oReq.open(type, url , true);
+      oReq.open(method, url , true);
       oReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      if (headerAddOn) {
+        oReq.setRequestHeader(headerAddOn.key, headerAddOn.value);
+      }
       oReq.onload = function(ev) {
         callback(this);
       };
@@ -52,7 +55,7 @@ define(['utils/utils'], function(utils) {
       var div = document.createElement('div'),
           response = (typeof data.responseText === 'string') ? JSON.parse(data.responseText) : data;
       div.innerHTML = this.template(response);
-      this.view.innerHTML = div.firstChild.innerHTML;
+      this.view.innerHTML = utils.getFirstChild(div).innerHTML;
       this.addFormEventListeners();
       garhammar.initComponents(this.view);
     };

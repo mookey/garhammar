@@ -14,13 +14,61 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         animeTime   : 2000
       },
       {
-        coordinates : [40.413425, -3.703848],
+        coordinates : [42.217712, -8.713034],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Madrid, next stop Valencia.',
+        tooltip     : 'Vigo, next stop Valencia.',
         tooltipPos  : 'left',
         animeTime   : 300
       },
+      {
+        coordinates : [42.315279, -7.834121],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 200
+      },
+      {
+        coordinates : [41.956814, -7.438613],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 200
+      },
+      {
+        coordinates : [42.558523, -6.669570],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },
+      {
+        coordinates : [42.558523, -5.087539],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },
+      {
+        coordinates : [42.136300, -4.186660],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },
+      {
+        coordinates : [41.431793, -5.219375],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },
+      {
+        coordinates : [40.968887, -4.867813],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },
+      {
+        coordinates : [40.602880, -4.516250],
+        markerType  : route.path.markers.type.NONE,
+        line        : route.path.line.STRAIGHT,
+        animeTime   : 300
+      },      
       {
         coordinates : [39.891979, -3.044744],
         markerType  : route.path.markers.type.NONE,
@@ -95,7 +143,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     map.updateProjection          = updateProjection;
     map.addMarkerTooltipListener  = addMarkerTooltipListener;
     map.updateMapWidth            = updateMapWidth;
-    mapDataLink     = "/js/europe.topojson.json";
+    mapDataLink     = "/js/components/code/maps/europe.topojson.json";
     garhammar.registerListener('resize', 'code/maps/route');
 
     d3.json(mapDataLink, function(error, topojson) {
@@ -266,9 +314,13 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     var innerWidth  = this.graphElem.offsetWidth - this.options.margins.left - this.options.margins.right;
     var innerHeight = this.graphElem.offsetHeight - this.options.margins.top - this.options.margins.bottom;
     var b = this.bounds;
-    var s = 1 / Math.max((b[1][0] - b[0][0]) / innerWidth, (b[1][1] - b[0][1]) / innerHeight);
-    var t = [(innerWidth - s * (b[1][0] + b[0][0])) / 2, (innerHeight - s * (b[1][1] + b[0][1])) / 2];
-    // Update the projection to use computed scale & translate.
+    // In a good world...
+    // var s = 1 / Math.max((b[1][0] - b[0][0]) / innerWidth, (b[1][1] - b[0][1]) / innerHeight);
+    // var t = [(innerWidth - s * (b[1][0] + b[0][0])) / 2, (innerHeight - s * (b[1][1] + b[0][1])) / 2];
+
+    // ..hack scale and translation
+    var s = 1.4 / Math.max((b[1][0] - b[0][0]) / innerWidth, (b[1][1] - b[0][1]) / innerHeight);
+    var t = [(innerWidth - s * (b[1][0] + b[0][0])) / 2, (innerHeight - s * (b[1][1] + b[0][1])) / 2.9];
     this.projection
         .scale(s)
         .translate(t);

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['templates/templates', 'utils/utils', 'components/base', 'smoothScroll'], function(templates, utils, Base, smoothScroll) {
+define([templatesName, 'utils/utils', 'components/base', 'smoothScroll'], function(templates, utils, Base, smoothScroll) {
 
   var form = {};
 

@@ -227,3 +227,22 @@ body {
     margin-right: 30px;
   }
 }
+
+.tags {
+  li {
+    display: inline-block;
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid $disabled-color;
+  background-color: $box-border-grey;
+}
+
+.styles .tag {
+  color: $font-color;
+}

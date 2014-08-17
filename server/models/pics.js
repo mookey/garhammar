@@ -31,6 +31,8 @@ pics.create = function(pic) {
   u.created_human = moment(u.created).format('HH:mm | D MMM YYYY');
   u.updated       = u.created;
   u.updated_human = u.created_human;
+  u.dateTaken     = pic.dateTaken;
+  u.taken_human   = moment(u.dateTaken).format('HH:mm | D MMM YYYY');
   u.desc          = pic.desc;
   u.tags          = pic.tags;
   u.xs            = pic.xs;
@@ -49,6 +51,43 @@ pics.create = function(pic) {
   };
 
   return u;
+};
+
+pics.update = function(pic, cb) {
+  var updated       = new Date(),
+      updated_human = moment(updated).format('HH:mm | D MMM YYYY');
+
+  this.collection.findAndModify(
+    { _id: pic._id },
+    { $set: {
+        name          : pic.name,
+        dateTaken         : pic.dateTaken,
+        dateTaken_human   : moment(pic.dateTaken).format('HH:mm | D MMM YYYY'),
+        desc          : pic.desc,
+        updated       : updated,
+        updated_human : updated_human
+      }
+    },
+    cb
+  );
+};
+
+pics.addTag = function(id, tag, cb) {
+  this.collection.findAndModify(
+    { _id: id },
+    { $push: { tags: tag } },
+    { new : true },
+    cb
+  );
+};
+
+pics.removeTag = function(id, tag, cb) {
+  this.collection.findAndModify(
+    { _id: id },
+    { $pull: { tags: tag } },
+    { new : true },
+    cb
+  );
 };
 
 pics.getSome = function(skip, limit, cb) {

@@ -1,21 +1,38 @@
-  <div class="placeholder js-component" data-component="admin/pics/pic" data-template="_admin_pic_single" data-id="{{id}}">
+  <div class="placeholder js-component" data-component="admin/pics/pic" data-template="_admin_pic" data-id="{{id}}">
     <form
-      action="/admin/pics/{{id}}"
+      action="/admin/pic/{{_id}}"
       method="post"
     >
-      {{> _alert}}
+      <input type="hidden" name="filename" value="{{filename}}"/>
+      <input type="hidden" name="no" value="{{no}}"/>
+      <input type="hidden" name="width" value="{{width}}"/>
+      <input type="hidden" name="height" value="{{height}}"/>
+
+      {{> _alert alert}}
       <img width="{{width}}" height="{{height}}" class="spinner" src="/img/dist/ajax-loader.gif" alt="{{name}}" data-echo="/img/dist/{{filename}}" data-no="{{no}}">
       <div class="top-10 input">
+        Name:<br/>
+        <input type="text" name="name" value="{{name}}"> 
+      </div>
+      <div class="top-10 input">
+        Date:<br/>
+        <input class="js-datepicker" type="text" name="dateTaken" value="{{dateTaken}}"> 
+      </div>
+      <div class="top-10 input">
         Description:<br/>
-        <textarea>{{desc}}</textarea>
+        <textarea name="desc">{{desc}}</textarea>
       </div>
       <div class="top-10 input">
         Add tag:<br/>
-        <input type="text" name="tag"/>
+        <input class="tag-input right-10 js-add-tag-input" type="text" name="addTag"/><a href="/admin/pic/{{_id}}/addTag" class="icon icon-plus js-add-tag"></a>
+        <ul class="tags js-tags">
+          {{#each tags}}
+            <li>
+              <span class="tag right-10">{{this}}</span><a href="/admin/pic/{{../_id}}/removeTag" class="icon icon-minus js-remove-tag"></a>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-      {{#each tags}}
-        <input class="top-10" name="tag" type="text" value=""/>
-      {{/each}}
       <div class="top-20">
         <input type="submit" value="Update">
       </div>

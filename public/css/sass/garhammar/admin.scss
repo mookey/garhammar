@@ -1,0 +1,18 @@
+.admin {
+  .tag-input {
+    width: 80%;
+    display: inline-block;
+  }
+  .tags li {
+    margin-top: 5px;
+    display: block;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid $disabled-color;
+    background-color: $box-border-grey;
+  }
+}

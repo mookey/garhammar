@@ -93,10 +93,12 @@ module.exports = function(app) {
             vertical  : pic.vertical,
             desc      : pic.desc,
             tags      : pic.tags,
+            dateTaken : pic.dateTaken,
+            dateTaken_human : pic.dateTaken_human ? pic.dateTaken_human.substring(8, 20) : '',
             width     : dimensions.width,
             height    : dimensions.height,
             no        : i,
-            id        : pic._id
+            _id       : pic._id
           });
           i++;
         });

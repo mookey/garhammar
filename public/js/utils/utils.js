@@ -12,6 +12,13 @@ define([], function() {
     }
   };
 
+  utils.getPreviousSibling = function(element) {
+    var p = element;
+    do p = p.previousSibling;
+    while (p && p.nodeType != 1);
+    return p;
+  };
+
   utils.getFirstChild = function(el) {
     var firstChild = el.firstChild;
     while(firstChild !== null && firstChild.nodeType === 3){ // skip TextNodes
@@ -50,6 +57,12 @@ define([], function() {
     setTimeout(function() {
       elem.classList.remove('highlight');
     }, 500);
+  };
+
+  utils.removeNode = function(elem) {
+    if (elem.parentNode) {
+      elem.parentNode.removeChild(elem);
+    }
   };
 
   return utils;

@@ -17,15 +17,17 @@ svg {
   }
   .unit {
     fill: #FAFAFA;
-    stroke: #C7C7C7;
+    stroke: #aaaaaa;
     stroke-width: 1px;
   }
   .highlight {
     fill : url(#diagonalHatch);
   }
   .route {
-    stroke: #999;
+    stroke: #333;
     fill: transparent;
+    stroke-width: 2px;
+    stroke-opacity: .7;
     &.shadow {
       stroke: #ccc;
       fill: transparent;

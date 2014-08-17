@@ -6,6 +6,7 @@ var express       = require('express'),
     session       = require('express-session'),
     MongoStore    = require('connect-mongo')(session),
     cookieParser  = require('cookie-parser'),
+    bodyParser    = require('body-parser'),
     passport      = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     bcrypt        = require('bcrypt'),
@@ -48,6 +49,7 @@ module.exports = function(app) {
             db    : 'garhammar'
           })
         }));
+      app.use(bodyParser.json());
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(express.static(__dirname + '/../../public', { maxAge: maxAge }));

@@ -128,17 +128,18 @@ module.exports = function(grunt) {
         'node'          : true,
         'validthis'     : true,
         'globals' : {
-          'window'      : true,
-          'Handlebars'  : true,
-          'document'    : true,
-          'location'    : true,
-          'requirejs'   : true,
-          'define'      : true,
+          'window'      : false,
+          'Handlebars'  : false,
+          'document'    : false,
+          'location'    : false,
+          'requirejs'   : false,
+          'define'      : false,
           'l'           : true,
           'garhammar'   : true,
-          'XMLHttpRequest' : true,
-          'FormData'    : true,
-          'google'      : false
+          'XMLHttpRequest' : false,
+          'FormData'    : false,
+          'google'      : false,
+          'templatesName' : false
         },
         ignores : ['public/js/libs/**/*.js', 'public/js/templates/*.js']
       }
@@ -190,6 +191,12 @@ module.exports = function(grunt) {
            paths : {
               requireLib : 'libs/requirejs/require'
            },
+          onBuildWrite: function (moduleName, path, contents) {
+                if (moduleName === 'components/tabs' || moduleName === 'components/sidebar') {
+                  return contents.replace("templatesName", "'templates/templates'");
+                }
+                return contents;
+           },
            include : [
               'requireLib',
               'components/sidebar',
@@ -215,7 +222,7 @@ module.exports = function(grunt) {
            },
           onBuildWrite: function (moduleName, path, contents) {
                 if (moduleName === 'components/tabs' || moduleName === 'components/sidebar') {
-                  return contents.replace("'templates/templates'", "'templates/admin_templates'");
+                  return contents.replace("templatesName", "'templates/admin_templates'");
                 }
                 return contents;
            },

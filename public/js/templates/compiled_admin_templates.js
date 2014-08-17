@@ -40,22 +40,43 @@ templates['_admin_pic'] = template(function (Handlebars,depth0,helpers,partials,
 helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
-  
-  return "\n        <input class=\"top-10\" name=\"tag\" type=\"text\" value=\"\"/>\n      ";
+  var buffer = "", stack1;
+  buffer += "\n            <li>\n              <span class=\"tag right-10\">"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "</span><a href=\"/admin/pic/"
+    + escapeExpression(((stack1 = (depth1 && depth1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/removeTag\" class=\"icon icon-minus js-remove-tag\"></a>\n            </li>\n          ";
+  return buffer;
   }
 
-  buffer += "  <div class=\"placeholder js-component\" data-component=\"admin/pics/pic\" data-template=\"_admin_pic_single\" data-id=\"";
+  buffer += "  <div class=\"placeholder js-component\" data-component=\"admin/pics/pic\" data-template=\"_admin_pic\" data-id=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\n    <form\n      action=\"/admin/pics/";
-  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+    + "\">\n    <form\n      action=\"/admin/pic/";
+  if (helper = helpers._id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0._id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\"\n      method=\"post\"\n    >\n      ";
-  stack1 = self.invokePartial(partials._alert, '_alert', depth0, helpers, partials, data);
+    + "\"\n      method=\"post\"\n    >\n      <input type=\"hidden\" name=\"filename\" value=\"";
+  if (helper = helpers.filename) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.filename); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"/>\n      <input type=\"hidden\" name=\"no\" value=\"";
+  if (helper = helpers.no) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.no); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"/>\n      <input type=\"hidden\" name=\"width\" value=\"";
+  if (helper = helpers.width) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.width); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"/>\n      <input type=\"hidden\" name=\"height\" value=\"";
+  if (helper = helpers.height) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.height); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"/>\n\n      ";
+  stack1 = self.invokePartial(partials._alert, '_alert', (depth0 && depth0.alert), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      <img width=\"";
   if (helper = helpers.width) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -77,14 +98,26 @@ function program1(depth0,data) {
   if (helper = helpers.no) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.no); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\n      <div class=\"top-10 input\">\n        Description:<br/>\n        <textarea>";
+    + "\">\n      <div class=\"top-10 input\">\n        Name:<br/>\n        <input type=\"text\" name=\"name\" value=\"";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"> \n      </div>\n      <div class=\"top-10 input\">\n        Date:<br/>\n        <input class=\"js-datepicker\" type=\"text\" name=\"dateTaken\" value=\"";
+  if (helper = helpers.dateTaken) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.dateTaken); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"> \n      </div>\n      <div class=\"top-10 input\">\n        Description:<br/>\n        <textarea name=\"desc\">";
   if (helper = helpers.desc) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.desc); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</textarea>\n      </div>\n      <div class=\"top-10 input\">\n        Add tag:<br/>\n        <input type=\"text\" name=\"tag\"/>\n      </div>\n      ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.tags), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    + "</textarea>\n      </div>\n      <div class=\"top-10 input\">\n        Add tag:<br/>\n        <input class=\"tag-input right-10 js-add-tag-input\" type=\"text\" name=\"addTag\"/><a href=\"/admin/pic/";
+  if (helper = helpers._id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0._id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/addTag\" class=\"icon icon-plus js-add-tag\"></a>\n        <ul class=\"tags js-tags\">\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.tags), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      <div class=\"top-20\">\n        <input type=\"submit\" value=\"Update\">\n      </div>\n    </form>\n  </div>";
+  buffer += "\n        </ul>\n      </div>\n      <div class=\"top-20\">\n        <input type=\"submit\" value=\"Update\">\n      </div>\n    </form>\n  </div>";
   return buffer;
   });
 
@@ -94,7 +127,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<h1>Pictures</h1>\n\n<div class=\"top-20 tabs js-tabs-wrapper js-component\" data-component=\"tabs\">\n  <ul class=\"tabs-large nav-two\">\n      <li>\n          <a class=\"active js-active js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_info\" data-content-id=\"0\">Info</a>\n      </li><li>\n          <a class=\"js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_upload\" data-content-id=\"1\">Upload</a>\n      </li>\n  </ul>\n\n  <a class=\"tab active js-active js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_info\" data-content-id=\"0\">Info<span class=\"pull-right icon icon-arrow-down\"></span></a>  \n  <div class=\"tabs-content js-tabs-content\">\n    <div class=\"spinner\"></div>\n  </div>\n  \n  <a class=\"tab js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_upload\" data-content-id=\"1\">Upload<span class=\"pull-right icon icon-arrow-up\"></span></a>\n  <div class=\"hide tabs-content tabs-content-last js-tabs-content\">\n    <div class=\"spinner\"></div>\n  </div>\n\n</div>\n";
+  return "<h1>Pictures</h1>\n\n<div class=\"top-20 tabs js-tabs-wrapper js-component\" data-component=\"tabs\">\n  <ul class=\"tabs-large nav-two\">\n      <li>\n          <a class=\"js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_upload\" data-content-id=\"0\">Upload</a>\n      </li><li>\n          <a class=\"active js-active js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_info\" data-content-id=\"1\">Info</a>\n      </li>\n  </ul>\n  <a class=\"tab js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_upload\" data-content-id=\"0\">Upload<span class=\"pull-right icon icon-arrow-up\"></span></a>\n  <div class=\"hide tabs-content tabs-content-last js-tabs-content\">\n    <div class=\"spinner\"></div>\n  </div>\n\n  <a class=\"tab active js-active js-tabs-link\" href=\"\" data-runtime-template=\"_admin_pics_info\" data-content-id=\"1\">Info<span class=\"pull-right icon icon-arrow-down\"></span></a>  \n  <div class=\"tabs-content js-tabs-content\">\n    <div class=\"spinner\"></div>\n  </div>\n  \n\n</div>\n";
   });
 
 templates['_admin_pics'] = template(function (Handlebars,depth0,helpers,partials,data) {

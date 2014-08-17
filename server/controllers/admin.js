@@ -19,11 +19,97 @@ module.exports = function(app) {
     XL  : 1020 // 1080 - 40 main padding - 20 placeholder padding
   };
 
-  app.post('/admin/pics/:id', function(req, res) {
-    req.locals.template = 'pics/_admin_pics';
-    req.locals.alert.pictures = { isError : false, message : 'Saved'};
-    r(req, res);
+  app.post('/admin/pic/:id/addTag', function(req, res) {
+    req.locals.template = 'pics/_admin_pic';
+    var id = input_utils.sanitize(req.param('id'));
+    var tag = input_utils.sanitize(req.param('tag'));
+    if (!tag) {
+      req.locals._id = id;
+      r(req, res);
+      return;
+    }
+    pics.addTag(id, tag, function(err, pic) {
+      if (err) {
+        req.locals.alert = {
+          isError : true,
+          message : 'Error!'
+        };
+        r(req, res, 400);
+      }
+      req.locals.tags = pic.tags;
+      req.locals._id = id;
+      r(req, res);
+    });
   });
+
+  app.post('/admin/pic/:id/removeTag', function(req, res) {
+    req.locals.template = 'pics/_admin_pic';
+    var id = input_utils.sanitize(req.param('id'));
+    var tag = input_utils.sanitize(req.param('tag'));
+    pics.removeTag(id, tag, function(err, pic) {
+      if (err) {
+        req.locals.alert = {
+          isError : true,
+          message : 'Error!'
+        };
+        r(req, res, 400);
+      }
+      req.locals.tags = pic.tags;
+      r(req, res);
+    });
+  });
+
+
+  app.post('/admin/pic/:id', input_utils.convertFields, function(req, res) {
+    
+    var p = {
+        _id    : input_utils.sanitize(req.param('id')),
+        name  : input_utils.sanitize(req.fields.name),
+        dateTaken : new Date(input_utils.sanitize(req.fields.dateTaken)),
+        desc  : input_utils.sanitize(req.fields.desc)
+    };
+
+    pics.update(p, function(err, pic) {
+      if (!err) {
+        req.locals          = pic;
+        req.locals.filename = req.fields.filename;
+        req.locals.no       = req.fields.no;
+        req.locals.width    = req.fields.width;
+        req.locals.height   = req.fields.height;
+        req.locals.alert    = {
+          message : 'Saved!'
+        };
+        req.locals.template = 'pics/_admin_pic';
+        r(req, res);
+        return;
+      }
+
+      req.locals.alert = { isError : true, message : 'Oops, wrong, just wrong'};
+      r(req, res, 500);
+
+    });
+
+
+
+    // l('pic',pic);
+
+
+    // req.locals = { 
+    //   isError   : false,
+    //   message   : 'Saved',
+    //   width     : req.fields.width,
+    //   height    : req.fields.height,
+    //   filename  : req.fields.filename,
+    //   no        : req.fields.no,
+    //   template  : 'pics/_admin_pic',
+    //     name  : req.fields.name,
+    //     dateTaken : new Date(req.fields.date),
+    //     desc  : req.fields.desc,
+    //     tags  : req.fields['tags[]']
+    // };
+    // r(req, res);
+  });
+
 
   app.get('/admin/pics', function(req, res) {
     req.locals.template = 'pics/_admin_pic_tabs';

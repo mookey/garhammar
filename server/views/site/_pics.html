@@ -1,16 +1,19 @@
-<h1>Pictures</h1>
-<div class="pics js-component" data-component="pics/pics" data-template="_pic">
-  <div class="border-box grey bottom-20">
-    Integer dapibus feugiat augue, id dapibus augue tristique in. Suspendisse elit orci, euismod non nulla ut, sagittis luctus nulla. Cras mattis est eget leo lacinia adipiscing. Nam facilisis sem massa, eget dignissim mi rhoncus in. Aliquam laoreet scelerisque leo sed luctus.
+<div class="pics relative js-component" data-component="pics/pics" data-template="_pic">
+  <h1>Pictures<a class="left-10 icon icon-question hide js-info-window-icon"></a></h1>
+  <div class="abs-tooltip hide js-close-wrapper">
+    <a class="icon icon-cross js-close"></a>
+    <div class="abs-tooltip-message">
+        1. Maecenas eu sapien ligula. Aliquam tempor urna sit amet congue <a href="http://toddmotto.com/echo-js-simple-javascript-image-lazy-loading/" target="_blank">accumsan</a>. Sed volutpat tellus erat, a lacinia dui tristique sed. Cras sem est, adipiscing eget leo et, iaculis tempor justo.
+    </div>
   </div>
   <div class="not-xs bottom-20">
     <form>
       <div class="h3">View</div>
       <label>
-        <input type="radio" name="gallery" checked="checked"/> Gallery
+        <input type="radio" name="gallery" value="gallery"/> Gallery
       </label>
       <label class="left-10">
-        <input type="radio" name="gallery"/> Overview
+        <input type="radio" name="gallery" value="overview"/> Overview
       </label>
     </form>
   </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['templates/templates', 'components/base', 'utils/utils'], function(templates, Base, utils) {
+define([templatesName, 'components/base', 'utils/utils'], function(templates, Base, utils) {
 
   var tabs = {};
 

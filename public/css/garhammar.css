@@ -1626,6 +1626,11 @@ input[type="checkbox"] {
   right: 96px;
 }
 
+.pics .abs-tooltip {
+  width: auto;
+  position: relative;
+}
+
 button,
 input[type="submit"],
 .button {
@@ -1933,6 +1938,23 @@ body {
   margin-right: 30px;
 }
 
+.tags li {
+  display: inline-block;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid #b6b6b6;
+  background-color: #e5e5e5;
+}
+
+.styles .tag {
+  color: #333333;
+}
+
 .alert {
   border: 3px solid #8ed378;
   color: #469c2b;
@@ -2047,15 +2069,17 @@ svg text {
 }
 svg .unit {
   fill: #FAFAFA;
-  stroke: #C7C7C7;
+  stroke: #aaaaaa;
   stroke-width: 1px;
 }
 svg .highlight {
   fill: url(#diagonalHatch);
 }
 svg .route {
-  stroke: #999;
+  stroke: #333;
   fill: transparent;
+  stroke-width: 2px;
+  stroke-opacity: .7;
 }
 svg .route.shadow {
   stroke: #ccc;

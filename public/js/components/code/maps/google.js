@@ -12,23 +12,18 @@ define(['d3', 'utils/utils', 'components/code/maps/maps_base', 'async!http://map
         coordinates : [59.325600, 18.069920],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.NONE,
-        tooltip     : 'Stockholm, the start of our journey.',
         animeTime   : 300
       },
       {
         coordinates : [59.325600, 18.069920],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Madrid, next stop Valencia.',
-        tooltipPos  : 'left',
         animeTime   : 300
       },
       {
         coordinates : [59.326710, 18.068603],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Madrid, next stop Valencia.',
-        // tooltipPos  : 'left',
         animeTime   : 300
       }
       // {

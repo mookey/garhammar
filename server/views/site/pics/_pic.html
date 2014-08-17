@@ -1,5 +1,21 @@
 {{#each pictures}}
   <div class="placeholder">
-    <img width="{{width}}" height="{{height}}" class="spinner" src="/img/dist/ajax-loader.gif" alt="{{name}}" data-echo="/img/dist/{{filename}}" data-no="{{no}}">
+    <h3>{{name}}</h3>
+    <div class="small lighter">{{dateTaken_human}}</div>
+    <img width="{{width}}" height="{{height}}" class="spinner top-10" src="/img/dist/ajax-loader.gif" alt="{{name}}" data-echo="/img/dist/{{filename}}" data-no="{{no}}">
+    <ul class="tags top-10 clean-list horizontal">
+      {{#each tags}}
+        <li>
+          {{#if @last}}
+            <span class="tag">{{this}}</span>
+          {{else}}
+            <span class="tag right-10">{{this}}</span>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+    <div class="top-10">
+      {{desc}}
+    </div>
   </div>
 {{/each}}
