@@ -17,8 +17,8 @@ module.exports = function(app) {
     r(req, res);
   });
 
-  app.get('/me', function (req, res) {
-    req.locals.template = '_me';
+  app.get('/site', function (req, res) {
+    req.locals.template = '_site';
     r(req, res);
   });
 

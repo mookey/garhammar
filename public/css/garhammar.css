@@ -121,12 +121,20 @@ legend {
   margin-right: 10px;
 }
 
+.top-5 {
+  margin-top: 5px;
+}
+
 .top-10 {
   margin-top: 10px;
 }
 
 .top-20 {
   margin-top: 20px;
+}
+
+.top-40 {
+  margin-top: 40px;
 }
 
 .bottom-20 {
@@ -139,6 +147,10 @@ legend {
 
 .relative {
   position: relative;
+}
+
+p {
+  margin: 10px 0;
 }
 
 @font-face {
@@ -1799,9 +1811,6 @@ body {
   padding-top: 190px;
 }
 
-.tabs {
-  /*padding-right: 20px;*/
-}
 .tabs .tab {
   border-top: 1px solid #e5e5e5;
   width: 100%;
@@ -1817,6 +1826,11 @@ body {
 .tabs .tab .icon {
   margin-top: -4px;
   float: right;
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -ms-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
 }
 .tabs .active {
   border-left-color: #e5e5e5;
@@ -1828,11 +1842,10 @@ body {
   border-left: 5px solid #e5e5e5;
   padding: 15px 10px 30px 15px;
   border-top: 1px solid #e5e5e5;
-  /*border-bottom: 1px solid $box-border-grey;*/
 }
 .tabs .tabs-content-last {
-  /*border-top: none;*/
   border-bottom: 1px solid #e5e5e5;
+  border-top: 0;
 }
 .tabs .tabs-large {
   display: none;
@@ -1842,11 +1855,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  .tabs ul {
-    text-align: center;
-  }
   .tabs li {
-    display: inline-block;
     box-sizing: border-box;
     border: 0;
   }
@@ -1854,6 +1863,7 @@ body {
     border-top: 0;
   }
   .tabs .tabs-large {
+    text-align: center;
     display: block;
   }
   .tabs .tabs-large a {
@@ -1863,9 +1873,13 @@ body {
     padding: 10px 0 15px 0;
     border-top: 5px solid transparent;
     background: white;
+    font-size: 16px;
   }
   .tabs .tabs-large a:hover {
     border-top-color: #e5e5e5;
+  }
+  .tabs .tabs-large li {
+    display: inline-block;
   }
   .tabs .tabs-large .active {
     border-top: 5px solid #e5e5e5;
@@ -1878,6 +1892,9 @@ body {
   }
   .tabs .nav-two li {
     width: 50%;
+  }
+  .tabs .nav-three li {
+    width: 33%;
   }
   .tabs .tabs-content {
     border: 0;
@@ -1955,6 +1972,15 @@ body {
   color: #333333;
 }
 
+.intro {
+  font-size: 16px;
+  max-width: 500px;
+}
+
+.tabs .active .icon {
+  transform: rotate(180deg);
+}
+
 .alert {
   border: 3px solid #8ed378;
   color: #469c2b;
@@ -2018,7 +2044,7 @@ body {
 }
 .sidebar li {
   display: inline-block;
-  width: 20%;
+  width: 25%;
   text-align: center;
 }
 .sidebar a {

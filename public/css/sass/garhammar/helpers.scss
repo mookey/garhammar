@@ -40,12 +40,21 @@ $screen-l : 992px;
   margin-right: 10px;
 }
 
+
+.top-5 {
+  margin-top: 5px;
+}
+
 .top-10 {
   margin-top: 10px;
 }
 
 .top-20 {
   margin-top: 20px;
+}
+
+.top-40 {
+  margin-top: 40px;
 }
 
 .bottom-20 {
@@ -58,4 +67,8 @@ $screen-l : 992px;
 
 .relative {
   position: relative;
+}
+
+p {
+  margin: 10px 0;
 }

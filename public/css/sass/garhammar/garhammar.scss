@@ -75,7 +75,6 @@ body {
 }
 
 .tabs {
-  /*padding-right: 20px;*/
   .tab {
     border-top: 1px solid $box-border-grey;
     width: 100%;
@@ -90,6 +89,7 @@ body {
     .icon {
       margin-top: -4px;
       float: right;
+      @include transition(transform 0.5s ease);
     }
   }
   .active {
@@ -102,11 +102,10 @@ body {
     border-left: 5px solid $box-border-grey;
     padding: 15px 10px 30px 15px;
     border-top: 1px solid $box-border-grey;
-    /*border-bottom: 1px solid $box-border-grey;*/
   }
   .tabs-content-last {
-    /*border-top: none;*/
     border-bottom: 1px solid $box-border-grey;
+    border-top: 0;
   }
   .tabs-large {
     display: none;
@@ -116,14 +115,9 @@ body {
   }
 }
 
-
 @media (min-width: $screen-md) {
   .tabs {
-    ul {
-      text-align: center;
-    }
     li {
-      display: inline-block;
       box-sizing: border-box;
       border: 0;
       &:first-child {
@@ -131,6 +125,7 @@ body {
       }
     }
     .tabs-large {
+      text-align: center;
       display: block;
       a {
         border: 0;
@@ -139,9 +134,13 @@ body {
         padding: 10px 0 15px 0;
         border-top: 5px solid transparent;
         background: $white;
+        font-size: $font-size-text-large;
         &:hover {
           border-top-color: $box-border-grey;
         }
+      }
+      li {
+        display: inline-block;
       }
       .active {
         border-top: 5px solid $box-border-grey;
@@ -155,6 +154,9 @@ body {
     }
     .nav-two li {
       width: 50%;
+    }
+    .nav-three li {
+      width: 33%;
     }
     .tabs-content {
       border: 0;
@@ -245,4 +247,17 @@ body {
 
 .styles .tag {
   color: $font-color;
+}
+
+.intro {
+  font-size: $font-size-text-large;
+  max-width: $screen-s;
+}
+
+.tabs {
+  .active {
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
 }

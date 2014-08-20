@@ -7,11 +7,12 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
   tabs.init = function(aView) {
     var f             = Object.create(new Base());
     f.view            = aView;
-    f.initLinks       = initLinks;
     f.addTabsListener = addTabsListener;
     f.initContext     = initContext;
-    f.initLinks();
+    f.onEvent         = onEvent;
+    f.addTabsListener();
     f.initContext();
+    garhammar.registerListener('resize', 'tabs');
     return f;
   };
 
@@ -19,12 +20,35 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
     this.addTabsListener();
   }
 
+  function onEvent(eventName) {
+    var link;
+    var contentId;
+    var style = window.getComputedStyle(this.view.querySelector('.js-tabs-large'));
+    if (style.getPropertyValue('display') === 'none') {
+      return;
+    }
+    if (this.view.querySelector('.js-active')) {
+      return;
+    }
+    link = this.view.querySelector('.js-tabs-link');
+    contentId = parseInt(link.getAttribute('data-content-id'), 10);
+    utils.each(this.view.querySelectorAll('.js-tabs-link[data-content-id="' + contentId + '"]'), function(link) {
+      link.classList.add('active');
+      link.classList.add('js-active');
+    });
+    this.view.querySelectorAll('.js-tabs-content')[contentId].classList.remove('hide');
+  }
+
   function initContext() {
-    var activeLink    = this.view.querySelector('a.js-active');
-    var contentId     = activeLink.getAttribute('data-content-id');
-    var contents      = this.view.querySelectorAll('.js-tabs-content');
-    var content       = contents[contentId];
-    content.innerHTML = templates[activeLink.getAttribute('data-runtime-template')]();
+    var activeLink      = this.view.querySelector('a.js-active');
+    var runtimeTemplate = activeLink.getAttribute('data-runtime-template');
+    if (!runtimeTemplate) {
+      return;
+    }
+    var contentId       = activeLink.getAttribute('data-content-id');
+    var contents        = this.view.querySelectorAll('.js-tabs-content');
+    var content         = contents[contentId];
+    content.innerHTML   = templates[runtimeTemplate]();
     garhammar.initComponents(content);
   }
 
@@ -34,32 +58,30 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
     var contents  = this.view.querySelectorAll('.js-tabs-content');
     utils.each(tabLinks, function(link) {
       link.addEventListener('click', function(ev) {
+
         var contentId;
-        garhammar.removeListeners('resize');
         ev.preventDefault();
         utils.each(contents, function(content) {
           content.classList.add('hide');
         });
+
+        if (this.parentNode.classList.contains('js-tabs-wrapper') && this.classList.contains('js-active')) {
+          utils.each(tabLinks, function(link) {
+            link.classList.remove('active');
+            link.classList.remove('js-active');
+          });
+          return; 
+        }
+
         utils.each(tabLinks, function(link) {
-          var icon;
           link.classList.remove('active');
           link.classList.remove('js-active');
-          icon = link.querySelector('span');
-          if (icon) {
-            icon.classList.remove('icon-arrow-up');
-            icon.classList.add('icon-arrow-down');
-          }
         });
+
         contentId = parseInt(this.getAttribute('data-content-id'), 10);
         utils.each(self.view.querySelectorAll('.js-tabs-link[data-content-id="' + contentId + '"]'), function(link) {
-          var icon;
           link.classList.add('active');
           link.classList.add('js-active');
-          icon = link.querySelector('span');
-          if (icon) {
-            icon.classList.remove('icon-arrow-down');
-            icon.classList.add('icon-arrow-up');
-          }    
         });
         contents[contentId].classList.remove('hide');
         self.initContext();
