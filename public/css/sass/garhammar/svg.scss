@@ -37,7 +37,7 @@ svg {
     cursor: pointer;
   }
   .step {
-    stroke-width: 5px;
+    stroke-width: 2px;
     stroke-opacity: .3;
     stroke: blue;
   }
@@ -56,7 +56,7 @@ svg {
     background: $tooltip-background-color;
     border-radius: 50%;
     position: absolute;
-    z-index: 10;
+    z-index: 4;
     color: $white;
     margin-right: 0;
     box-shadow: 0 0 9px 0px $tooltip-background-color;

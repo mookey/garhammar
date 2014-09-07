@@ -17,8 +17,6 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         coordinates : [42.217712, -8.713034],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Vigo, next stop Valencia.',
-        tooltipPos  : 'left',
         animeTime   : 300
       },
       {
@@ -37,73 +35,75 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         coordinates : [42.558523, -6.669570],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [42.558523, -5.087539],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [42.136300, -4.186660],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [41.431793, -5.219375],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [40.968887, -4.867813],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [40.602880, -4.516250],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },      
       {
         coordinates : [39.891979, -3.044744],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 400
+        animeTime   : 200
       },
       {
         coordinates : [39.862470, -2.358099],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [39.375864, -2.154852],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [39.651323, -1.193548],
         markerType  : route.path.markers.type.NONE,
         line        : route.path.line.STRAIGHT,
-        animeTime   : 300
+        animeTime   : 200
       },
       {
         coordinates : [39.465722, -0.380909],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.CURVE,
+        tooltip     : 'Easy now, we\'re getting there.',
+        tooltipPos  : 'left',
         animeTime   : 1000
       },
       {
         coordinates : [41.880868, 12.474100],
         markerType  : route.path.markers.type.PULSE,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Last stop. Welcome to Rome. ',
+        tooltip     : 'Last stop. Welcome to Rome.',
         animeTime   : 1000
       }
     ]

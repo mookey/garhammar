@@ -12,7 +12,7 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
     f.onEvent         = onEvent;
     f.addTabsListener();
     f.initContext();
-    garhammar.registerListener('resize', 'tabs');
+    garhammar.registerListener('resize', 'tabs', aView.getAttribute("data-id"));
     return f;
   };
 
@@ -21,22 +21,16 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
   }
 
   function onEvent(eventName) {
-    var link;
     var contentId;
-    var style = window.getComputedStyle(this.view.querySelector('.js-tabs-large'));
+    var style;
+    if (this.view.querySelector('.js-tabs-link.js-active')) {
+      return;
+    }
+    style = window.getComputedStyle(this.view.querySelector('.js-tabs-large'));
     if (style.getPropertyValue('display') === 'none') {
       return;
     }
-    if (this.view.querySelector('.js-active')) {
-      return;
-    }
-    link = this.view.querySelector('.js-tabs-link');
-    contentId = parseInt(link.getAttribute('data-content-id'), 10);
-    utils.each(this.view.querySelectorAll('.js-tabs-link[data-content-id="' + contentId + '"]'), function(link) {
-      link.classList.add('active');
-      link.classList.add('js-active');
-    });
-    this.view.querySelectorAll('.js-tabs-content')[contentId].classList.remove('hide');
+    this.view.querySelector('.js-tabs-link').click();
   }
 
   function initContext() {
@@ -55,35 +49,48 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
   function addTabsListener() {
     var self      = this;
     var tabLinks  = this.view.querySelectorAll('.js-tabs-link');
-    var contents  = this.view.querySelectorAll('.js-tabs-content');
     utils.each(tabLinks, function(link) {
       link.addEventListener('click', function(ev) {
 
+        var isActive  = this.classList.contains('js-active');
+        var isSmall   = this.parentNode.classList.contains('js-tabs-wrapper');
         var contentId;
-        ev.preventDefault();
-        utils.each(contents, function(content) {
-          content.classList.add('hide');
-        });
+        var previouslyActiveLinks;
+        var previouslyActiveContentId;
+        var previouslyActiveContent;
 
-        if (this.parentNode.classList.contains('js-tabs-wrapper') && this.classList.contains('js-active')) {
-          utils.each(tabLinks, function(link) {
+        ev.preventDefault();
+
+        if (isActive && !isSmall) {
+          return;
+        }
+
+        previouslyActiveLinks     = self.view.querySelectorAll('.js-active');
+        if (previouslyActiveLinks.length) {
+          previouslyActiveContentId = previouslyActiveLinks[0].getAttribute('data-content-id');
+          previouslyActiveContent   = self.view.querySelector('.js-tabs-content[data-content-id="' + previouslyActiveContentId + '"]');
+
+          utils.each(previouslyActiveContent.querySelectorAll('.js-component'), function(c, i) {
+            garhammar.removeAllListenersForComponent(c.getAttribute('data-component'));
+          });
+          previouslyActiveContent.classList.add('hide');
+
+          utils.each(previouslyActiveLinks, function(link) {
             link.classList.remove('active');
             link.classList.remove('js-active');
           });
-          return; 
+
+          if (isActive && isSmall) {
+            return;
+          }
         }
 
-        utils.each(tabLinks, function(link) {
-          link.classList.remove('active');
-          link.classList.remove('js-active');
-        });
-
-        contentId = parseInt(this.getAttribute('data-content-id'), 10);
+        contentId = this.getAttribute('data-content-id');
         utils.each(self.view.querySelectorAll('.js-tabs-link[data-content-id="' + contentId + '"]'), function(link) {
           link.classList.add('active');
           link.classList.add('js-active');
         });
-        contents[contentId].classList.remove('hide');
+        self.view.querySelector('.js-tabs-content[data-content-id="' + contentId + '"]').classList.remove('hide');
         self.initContext();
       });
     });

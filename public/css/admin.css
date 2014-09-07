@@ -1473,7 +1473,7 @@ p {
   font-style: normal;
 }
 h1, h2, h3, .h1, .h2, .h3 {
-  margin: 15px 0 5px 0;
+  margin: 15px 0 10px 0;
   font-family: "Oswald light", sans-serif;
 }
 
@@ -1486,7 +1486,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  margin: 10px 0 0 0;
+  margin: 10px 0 10px 0;
   font-size: 24px;
 }
 
@@ -1585,7 +1585,7 @@ input[type="checkbox"] {
   background-color: #333333;
   padding: 15px 20px;
   border-radius: 6px;
-  z-index: 5;
+  z-index: 15;
   font-size: 14px;
   box-shadow: 0 0 15px -4px #333;
 }
@@ -1942,7 +1942,7 @@ body {
   visibility: hidden;
 }
 
-.code-google-map {
+.code-maps-google {
   width: 100%;
   height: 400px;
 }
@@ -1961,7 +1961,7 @@ body {
 
 .tag {
   display: inline-block;
-  padding: 2px 5px;
+  padding: 0 5px;
   border-radius: 5px;
   box-sizing: border-box;
   border: 1px solid #b6b6b6;
@@ -1975,6 +1975,19 @@ body {
 .intro {
   font-size: 16px;
   max-width: 500px;
+  position: relative;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+}
+.intro p {
+  text-align: justify;
+}
+
+.dim {
+  color: #aaa;
 }
 
 .tabs .active .icon {

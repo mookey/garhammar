@@ -54,7 +54,7 @@ define(['templates/admin_templates', 'utils/utils'], function(templates, utils) 
 
     pictures = JSON.parse(data.responseText);
     if (!pictures.pictures.length) {
-      garhammar.removeListeners('scroll');
+      garhammar.removeListener('scroll', 'admin/pics/pics');
       return;
     }
 
@@ -118,7 +118,7 @@ define(['templates/admin_templates', 'utils/utils'], function(templates, utils) 
   }
 
   function detach() {
-    garhammar.removeListeners('scroll');
+    garhammar.removeListener('scroll', 'admin/pics/pics');
     clearTimeout(this.timer);
   }
 

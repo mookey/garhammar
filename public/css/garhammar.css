@@ -1473,7 +1473,7 @@ p {
   font-style: normal;
 }
 h1, h2, h3, .h1, .h2, .h3 {
-  margin: 15px 0 5px 0;
+  margin: 15px 0 10px 0;
   font-family: "Oswald light", sans-serif;
 }
 
@@ -1486,7 +1486,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  margin: 10px 0 0 0;
+  margin: 10px 0 10px 0;
   font-size: 24px;
 }
 
@@ -1585,7 +1585,7 @@ input[type="checkbox"] {
   background-color: #333333;
   padding: 15px 20px;
   border-radius: 6px;
-  z-index: 5;
+  z-index: 15;
   font-size: 14px;
   box-shadow: 0 0 15px -4px #333;
 }
@@ -1942,7 +1942,7 @@ body {
   visibility: hidden;
 }
 
-.code-google-map {
+.code-maps-google {
   width: 100%;
   height: 400px;
 }
@@ -1961,7 +1961,7 @@ body {
 
 .tag {
   display: inline-block;
-  padding: 2px 5px;
+  padding: 0 5px;
   border-radius: 5px;
   box-sizing: border-box;
   border: 1px solid #b6b6b6;
@@ -1975,6 +1975,19 @@ body {
 .intro {
   font-size: 16px;
   max-width: 500px;
+  position: relative;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+}
+.intro p {
+  text-align: justify;
+}
+
+.dim {
+  color: #aaa;
 }
 
 .tabs .active .icon {
@@ -2115,7 +2128,7 @@ svg .graph-tooltip {
   cursor: pointer;
 }
 svg .step {
-  stroke-width: 5px;
+  stroke-width: 2px;
   stroke-opacity: .3;
   stroke: blue;
 }
@@ -2136,7 +2149,7 @@ svg .step {
   background: #333333;
   border-radius: 50%;
   position: absolute;
-  z-index: 10;
+  z-index: 4;
   color: white;
   margin-right: 0;
   box-shadow: 0 0 9px 0px #333333;
@@ -2176,4 +2189,30 @@ svg .step {
 .code-google-map-tooltip-marker .icon-question,
 .code-route-tooltip-marker .icon-question {
   margin-right: 0;
+}
+
+.code {
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 0 20px -10px black;
+  line-height: 20px;
+}
+
+.code-tag {
+  color: #e99595;
+}
+
+.code-input-type,
+.code-attribute-name {
+  color: #adf1f6;
+}
+
+.code-attribute-value {
+  color: #EED68B;
+}
+
+.code-class {
+  color: #adf1f6;
 }

@@ -159,7 +159,7 @@ define(['templates/templates', 'utils/utils'], function(templates, utils) {
   }
 
   function detach() {
-    garhammar.removeListeners('scroll');
+    garhammar.removeListener('scroll', 'pics/pics');
     clearTimeout(this.timer);
   }
 

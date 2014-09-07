@@ -55,7 +55,7 @@ input[type="checkbox"] {
   background-color: $font-color;
   padding: 15px 20px;
   border-radius: 6px;
-  z-index: 5;
+  z-index: 15;
   font-size: 14px;
   box-shadow: 0 0 15px -4px #333;
   .icon-cross {
@@ -96,6 +96,12 @@ input[type="checkbox"] {
   right: 85px;
   bottom: -20px;
   z-index: -1;
+}
+
+.code-maps-google-wrapper {
+  .abs-tooltip {
+    
+  }
 }
 
 .styles {

@@ -128,18 +128,19 @@ module.exports = function(grunt) {
         'node'          : true,
         'validthis'     : true,
         'globals' : {
-          'window'      : false,
-          'Handlebars'  : false,
-          'document'    : false,
-          'location'    : false,
-          'requirejs'   : false,
-          'define'      : false,
-          'l'           : true,
-          'garhammar'   : true,
-          'XMLHttpRequest' : false,
-          'FormData'    : false,
-          'google'      : false,
-          'templatesName' : false
+          'window'          : false,
+          'Handlebars'      : false,
+          'document'        : false,
+          'location'        : false,
+          'requirejs'       : false,
+          'define'          : false,
+          'l'               : true,
+          'garhammar'       : true,
+          'XMLHttpRequest'  : false,
+          'FormData'        : false,
+          'google'          : false,
+          'templatesName'   : false,
+          'localStorage'    : false
         },
         ignores : ['public/js/libs/**/*.js', 'public/js/templates/*.js']
       }
@@ -149,7 +150,7 @@ module.exports = function(grunt) {
     handlebars: {
       admin : {
         files: {
-          'public/js/templates/compiled_admin_templates.js': ['server/views/admin/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip_error.html']
+          'public/js/templates/compiled_admin_templates.js': ['server/views/admin/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip.html', 'server/views/_tooltip_error.html']
         },
         options: {
           exportAMD: true
@@ -157,7 +158,7 @@ module.exports = function(grunt) {
       },
       site: {
         files: {
-          'public/js/templates/compiled_templates.js': ['server/views/site/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip_error.html']
+          'public/js/templates/compiled_templates.js': ['server/views/site/**/_*.html', 'server/views/_alert.html', 'server/views/_tooltip.html', 'server/views/_tooltip_error.html']
         },
         options: {
           exportAMD: true

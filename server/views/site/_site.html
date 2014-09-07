@@ -1,10 +1,20 @@
 <div class="site">
-  <h1>The Greatest Site of All Times</h1>
-  <div class="intro"> 
-    <p>This is the shape of web to come. This is where Google Pagespeed goes to pray. This is perfection undying. If <a href="http://en.wikipedia.org/wiki/Steve_Wozniak" target="_blank">Steve "Wizard of Woz" Wozniak</a> and <a href="http://sv.wikipedia.org/wiki/Michelangelo" target="_blank">Michelangelo</a> had a baby and threw gin bottles at it this is what it would be like. If God was a web site it would refer to this site as a source of inspiration.
-    <br/>Every event listener, every border-radius soaked in brilliance.</p>
-    <p>There never was a site like this. How could there every be?
+  <h1>The Greatest Site of All Time</h1>
+  <div class="intro js-tooltip-wrapper"> 
+    By far.
+    <p>
+      The Internet is a vast ocean of mediocrity. Talent is as rare as a Greek government with organized finances. This is an altar of purity. This is the shape of web to come. This is where Google Pagespeed goes to pray. This is where Stack Overflow comes for answers. This is MDNs only reference. This is the branch GitHub marked <i>'completed'</i>. This is for the web what penicillin is for life expectancy. This is where <i>'beauty'</i> is redefined.
     </p>
+    <p>
+      If there ever was a perfect game, it was worse than this. If <a href="http://en.wikipedia.org/wiki/James_Cook" target="_blank">James Cook</a> had known about this discovery he whould have said <i>'Fuck it'</i>, poured himself a whisky and sold Endeavour to a toothpick company. If <a href="http://en.wikipedia.org/wiki/Steve_Wozniak" target="_blank">"Wizard of Woz"</a> and <a href="http://sv.wikipedia.org/wiki/Michelangelo" target="_blank">Michelangelo</a> had a baby which fed on nothing but the fumes of <a href="http://en.wikipedia.org/wiki/Ernest_Hemingway" target="_blank">Hemingways</a> empty rum bottles - this is what it would be like. It has the symmetry of a <a href="http://en.wikipedia.org/wiki/Johann_Sebastian_Bach" target="_blank">Bach</a> sonata, the craftsmanship of a Swiss atomic clock and content<a href="" class="abs-tooltip-icon icon js-tooltip-icon" data-tooltip-id="0"></a> more extraordinary than the first edition of <a href="http://en.wikipedia.org/wiki/On_the_Origin_of_Species" target="_blank">'On the Origin of Species'</a>.
+    </p>
+    <p>
+      Every event listener, every border-radius, every span tag - soaked in brilliance.
+    </p>
+    <p>
+      There never was a site like this. How could there every be?
+    </p>
+    {{> _tooltip tooltip}}
   </div>
 
   <div class="tabs js-tabs-wrapper js-component top-40" data-component="tabs">
@@ -19,23 +29,150 @@
     </ul>
 
     <a class="active js-active tab js-tabs-link" href="" data-content-id="0">Site<span class="pull-right icon icon-arrow-down"></span></a>  
-    <div class="tabs-content js-tabs-content">
-      <h3>Tools of the trade</h3>
-      <ul class="clean-list">
-        <li class="top-5"><a href="http://nodejs.org/" target="_blank">Nodejs</a></li>
-        <li class="top-5"><a href="http://requirejs.org/" target="_blank">Requirejs</a></li>
-        <li class="top-5"><a href="http://handlebarsjs.com/" target="_blank">Handlebars</a></li>
-      </ul>
+    <div class="tabs-content js-tabs-content" data-content-id="0">
+      <h3>Why?</h3>
+      <p>
+        Instead of relying on popular frameworks like <a href="https://angularjs.org/" target="_blank">Angular</a>, <a href="http://emberjs.com/" target="_blank">Ember</a>, [arbitrary name here], I wanted to try out some things of my own. And also, I didn't want to compromise with speed and architecture.
+      </p>
+      <h3>1. Shared templates between server and client</h3>
+      <p>
+        Not having the same templates client side as server side is a headache. You'll end up sending chunks of markup in async requests, cloning hidden elements to append to the markup or, worse, building elements by string concatination in the js files. Error prone and hard to maintain.<br/>
+        The idea of not having any logic in the view templates (<a href="http://mustache.github.io/" target="_blank">mustache</a>) is appealing but in the end it was just hard not to have access to a single <span class="tag">if-</span>operator and other helper functions. I went with <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a>.<br/>
+        In the case of an async request - return the model data and let the client populate the precompiled template. <br/>In the case of a server request - the template is populated server side and sent to the client.
+      </p>
+      <p>
+        No markup mismatch between server and client. Ever.
+      </p>
+      <h3>2. Small structered components</h3>
+      <p>
+        Almost everything on this site is a component. A component is a well defined piece of markup/css/js that can be reused. It is annotated with the class <span class="tag">js-component</span>. Each component has a script tied to it (<span class="tag">admin/login.js</span> in the code below) and the script holds a referens to a client side Handlebars template (<span class="tag">_admin_login</span>). 
+      </p>
+      <p>
+        This makes the scripting very modular. Each component has its own context (handlebars template) and has a small well defined responsibility. When a node annotated with <span class="tag">js-component</span> is found in the DOM the specific script is invoked. I owe much to <a href="http://requirejs.org/" target="_blank">RequireJS</a> which solves dependencies across components.
+      </p>
+      <div class="code top-20">
+
+        &lt;<span class="code-tag">div</span> <span class="code-class">class</span>="<span class="code-attribute-value">login js-component</span>" <span class="code-attribute-name">data-component</span>="<span class="code-attribute-value">admin/login</span>" <span class="code-attribute-name">data-template</span>="<span class="code-attribute-value">_admin_login</span>"&gt;<br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">h1</span>&gt;Login&lt;/<span class="code-tag">h1</span>&gt;<br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">div</span> <span class="code-class">class</span>="<span class="code-attribute-value">top-10</span>"&gt; 
+            \{{&gt; _alert alert}}
+          &lt;/<span class="code-tag">div</span>&gt;<br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">form</span>
+            <span class="code-attribute-name">method</span>="<span class="code-attribute-value">post</span>"
+            <span class="code-attribute-name">action</span>="<span class="code-attribute-value">/admin/login</span>"
+            <span class="code-attribute-name">enctype</span>="<span class="code-attribute-value">multipart/form-data</span>"
+          &gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">div</span> <span class="code-class">class</span>="<span class="code-attribute-value">input</span>"&gt;<br/>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">label</span>&gt;Username:&lt;<span class="code-tag">br</span>/&gt;<br/>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">input</span> <span class="code-input-type">type</span>="<span class="code-attribute-value">text</span>" <span class="code-attribute-name">name</span>="<span class="code-attribute-value">username</span>" <span class="code-attribute-name">value=</span>"{{fields.username}}" {{#if errors.username}}<span class="code-class">class</span>="<span class="code-attribute-value">error js-error</span>"{{/if}}&gt;<br/>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\{{&gt; _tooltip_error errors.username}}<br/>
+              
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">label</span>&gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">div</span>&gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">div</span> <span class="code-class">class</span>="<span class="code-attribute-value">input top-10</span>"&gt;<br/>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">label</span>&gt;Password:&lt;<span class="code-tag">br</span>/&gt;<br/>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">input</span> <span class="code-input-type">type</span>="<span class="code-attribute-value">password</span>" <span class="code-attribute-name">name</span>="<span class="code-attribute-value">password</span>"&gt;<br/>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">label</span>&gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">div</span>&gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">div</span> <span class="code-class">class</span>="<span class="code-attribute-value">top-10</span>"&gt;<br/>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-tag">input</span> <span class="code-input-type">type</span>="<span class="code-attribute-value">submit</span>" <span class="code-class">class</span>="<span class="code-attribute-value">button</span>" <span class="code-attribute-name">value</span>="<span class="code-attribute-value">Send</span>"&gt;<br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">div</span>&gt;<br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-tag">form</span>&gt;<br/>
+
+
+        &lt;/<span class="code-tag">div</span>&gt;
+
+      </div>
+
+      <h3 class="top-20">No dynamically appended/deleted nodes</h3>
+      <p>
+        Today it's popular with some sort of data observer - e.g if a value is updated in the model the view template will automatically be rerendered. Nice. Maybe I have written my last 'addEventListener'? This is probably a longed for feature if you have a lot of DOM manipulation. I went with a different approach. You see, I'm not really fond of client side DOM inserts/deletes/modifications. In my ordinary work I do it all the time but at the end of the day I think it obscures the data flow - suddenly there is new element in the DOM. Where the fuck did it come from?
+      </p>
+      <p>
+        Naah, instead my templates always have all elements in them - by all means, many of them are hidden at first, but non the less they are in the DOM and always will be. No suprises. Yes, it comes at a cost of somewhat bloated markup but it has been a price that I've been willing to pay. I can now also test every scenario just by populating the model - if there is an alert '<i>Saved!</i>' just add it to the model and it will be shown. If there is an error tooltip - the same thing.
+      </p>
+      <h3>3. Generic js components</h3>
+      <p>
+        I like javascript. With that being said I try always not to overuse it. I wanted my components to be clean and alike.
+      </p>
+      <p>
+        I'm usually careful with inheritance but in this case it made sence that my components inherited from a base class. The base class typically has implemented an ajax request method, a generic event listeners method and maybe some error handling. You can hook in different events - '<i>submit'</i>, '<i>change</i>', etc. If such an event is triggered than the form data is computed by the '<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData" target="_blank"><i>new FormData(form)</i></a>' function and asynchronously sent to the server.<br/>Post everything all the time. <i>Whiiit? Are you fuckin' mad</i>? Mmh, agree, there is overhead in always sending the complete form but there are also benefits. The server will take care of the post and than send a populated model to the client as json. The client receives the model and says '<i>Hey, I got data, and I have a reference to a precompiled template - let's replace my innerHTML with the template populated with the received data.</i>'. Whaoouh! All of the markup is replaced - the client has never been more stateless. And yes, you will have to reinit the components listeners again.
+      </p>
+      <p>
+        Most of my components look like this:
+      </p>
+      <div class="code top-20">
+        define([<span class="code-attribute-value">'templates/admin_templates'</span>, <span class="code-attribute-value">'components/base'</span>], <span class="code-attribute-name">function</span>(templates, Base) {
+          <br/><br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attribute-name">var</span> create = {};
+          <br/><br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attribute-name">create</span>.init = <span class="code-attribute-name">function</span>(aView) {<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attribute-name">var</span> c       = <span class="code-attribute-name">Object</span>.create(<span class="code-tag">new</span> Base());<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.view      = aView;<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.template  = templates[c.view.getAttribute(<span class="code-attribute-value">'data-template'</span>)];<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.addFormEventListeners();<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">return</span> c;<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;};
+          <br/><br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">return</span> create;<br/><br/>
+        });
+      </div>
+
+      <p class="top-20">
+        ...and the callback in the base class:
+      </p>
+      <div class="code top-20">
+        <span class="code-attribute-name">this</span>.callback = <span class="code-attribute-name">function</span>(data) {<br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attribute-name">var</span> div <span class="code-tag">=</span> <span class="code-attribute-name">document</span>.<span class="code-attribute-name">createElement</span>(<span class="code-attribute-value">'div'</span>);<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attribute-name">var</span> response <span class="code-tag">=</span> (<span class="code-tag">typeof</span> data.<span class="code-attribute-name">responseText</span> <span class="code-tag">===</span> <span class="code-attribute-value">'string'</span>) ? JSON.<span class="code-attribute-name">parse</span>(data.<span class="code-attribute-name">responseText</span>) : data;<br/><br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;div.innerHTML <span class="code-tag">=</span> this.template(response);<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.view.innerHTML <span class="code-tag">=</span> utils.getFirstChild(div).innerHTML;<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.addFormEventListeners();<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;garhammar.initComponents(this.view);<br/><br/>
+        };
+      </div>
+
+<!--       <h3>The jQuery situation</h3>
+      After speaking with the chief designer, who, by the way, happens to be me, we agreed on not supporting anything bad (i.e. IE8 and below). Hence, no need for jQuery.
+      <p>
+        I have no bad feelings towards jQuery though. Once upon a time I couldn't live without it. But with the coming of 'classList', 'XMLHttpRequest 2' (the person who came up with that name must surely be the enemy of the world), etc it isn't a big a thing to exclude it. Also I favour speed. I didn't want include a lib in order to use a few small functions. And I think they not only bloated but also obscured the api with the many similar function e.g. 'after'/'insertAfter'/'...'. The first rule of every api should be to keep the number of exposed functions at a minimum. 
+      </p>
+      <p>
+        Is there any good parts? Yes, there are. The idea of wrapping the orignal javascript object is a good thing. First and foremoste you don't extend the native elements. 
+
+        And also when selecting an array of elements  to add a class to each of them is beautiful <i>$('.content-box').addClass('hide')</i>. You also have a reference to each unwrapped js object in that array <i>$('.content-box')[3]</i>. And even though <i>$('.content-box')</i> is a single object you can reach the unwrapped element with the same syntax <i>$('.content-box')[0]</i>. Smart!
+      </p> -->
+
     </div>
     
     <a class="tab js-tabs-link" href="" data-content-id="1">Me<span class="pull-right icon icon-arrow-down"></span></a>
-    <div class="hide tabs-content js-tabs-content">
+    <div class="hide tabs-content js-tabs-content" data-content-id="1">
       <div class="spinner"></div>
     </div>
 
     <a class="tab tabs-last js-tabs-link" href="" data-content-id="2">Background<span class="pull-right icon icon-arrow-down"></span></a>
-    <div class="hide tabs-content tabs-content-last js-tabs-content">
-      <div class="spinner"></div>
+    <div class="hide tabs-content tabs-content-last js-tabs-content" data-content-id="2">
+      <h3>Early years</h3>
+      <p>
+        I was born in a log cabin that I had built with my own bare hands. We couldn't afford four seasons. We couldn't afford wikipedia on our Internet. When dad had sex he fantasized about a cheese sandwich. We couldn't afford light at the end of the tunnel. I had to share the familys DNA sequence with my brothers and sisters. If I woke up without erection on Christmas Eve I had nothing to play with.
+      </p>
     </div>
   </div>
 </div>

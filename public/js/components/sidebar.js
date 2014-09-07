@@ -20,9 +20,9 @@ define([templatesName, 'utils/utils', 'components/base', 'smoothScroll'], functi
     utils.each(this.view.querySelectorAll('a'), function(link) {
       link.addEventListener('click', function(ev) {
         var link = this;
-        garhammar.removeListeners('resize');
-        garhammar.removeListeners('load');
-        garhammar.removeListeners('scroll');
+        garhammar.removeAllListeners('resize');
+        garhammar.removeAllListeners('load');
+        garhammar.removeAllListeners('scroll');
 
         if (link.href.indexOf('logout') > -1) {
           return;

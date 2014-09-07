@@ -284,6 +284,24 @@ function program3(depth0,data) {
   return buffer;
   });
 
+templates['_tooltip'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"abs-tooltip hide js-abs-tooltip js-close-wrapper\" data-tooltip-id=\"";
+  if (helper = helpers.no) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.no); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <a class=\"icon icon-cross js-close\"></a>\n  <div class=\"abs-tooltip-message\">\n    ";
+  if (helper = helpers.message) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.message); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n  </div>\n  <svg class=\"abs-tooltip-arrow\">\n    <path d=\"M 2 29 L 2 38\"></path>\n    <path d=\"M 1 38 L 11 38\"></path>\n    <path d=\"M 2 8 Q 22 23 2 38\"></path>\n  </svg>\n</div>";
+  return buffer;
+  });
+
 templates['_tooltip_error'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};

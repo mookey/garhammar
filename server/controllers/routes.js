@@ -19,6 +19,10 @@ module.exports = function(app) {
 
   app.get('/site', function (req, res) {
     req.locals.template = '_site';
+    req.locals.tooltip = {
+      no : 0,
+      message : 'The only thing that might be flawed is the text. See, English is not my first language. Send me an email if you find misspellings or bad grammar. Pipe all other comments to /dev/null.'
+    };
     r(req, res);
   });
 
