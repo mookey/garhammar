@@ -118,28 +118,8 @@ garhammar.components.get = function(componentName, componentId) {
   return this[componentName];
 };
 
-garhammar.initComponents = function(ctx) {
 
-  var scope = ctx || document;
-
-  require(['utils/utils'], function(utils) {
-    utils.each(scope.querySelectorAll('.js-component'), requireComponent);
-    utils.each(scope.querySelectorAll('.js-close'), function(elem) { addCloseListener(utils, elem); });
-    utils.each(scope.querySelectorAll('.js-tooltip-icon'), function(elem) { addTooltipListener(utils, elem); });
-  });
-
-  function addCloseListener(utils, component) {
-    component.addEventListener('click', function(ev) {
-      ev.preventDefault();
-      var closeWrapper = utils.findParentBySelector(this, '.js-close-wrapper');
-      closeWrapper.classList.add('hide');
-      if (closeWrapper.classList.contains('js-abs-tooltip')) {
-        utils.findParentBySelector(closeWrapper, '.js-tooltip-wrapper').classList.remove('dim');
-      }
-    });
-  }
-
-  function addTooltipListener(utils, component) {
+garhammar.addTooltipListener = function(utils, component) {
     component.addEventListener('click', function(ev) {
       ev.preventDefault();
       var tooltipId   = component.getAttribute('data-tooltip-id');
@@ -158,11 +138,6 @@ garhammar.initComponents = function(ctx) {
       var bottomOffset;
       var leftOffset;
       wrapper.classList.add('dim');
-
-/*      if (tooltipElem.classList.contains('js-initialized')) {
-        tooltipElem.classList.remove('hide');
-        return;
-      }*/
 
       wrapperRect   = wrapper.getBoundingClientRect();
       elemRect      = component.getBoundingClientRect();
@@ -193,6 +168,27 @@ garhammar.initComponents = function(ctx) {
       tooltipElem.style.left = leftOffset + 'px';
       tooltipElem.classList.add('js-initialized');
       tooltipElem.classList.remove('hide');
+    });
+};
+
+garhammar.initComponents = function(ctx) {
+
+  var scope = ctx || document;
+
+  require(['utils/utils'], function(utils) {
+    utils.each(scope.querySelectorAll('.js-component'), requireComponent);
+    utils.each(scope.querySelectorAll('.js-close'), function(elem) { addCloseListener(utils, elem); });
+    utils.each(scope.querySelectorAll('.js-tooltip-icon'), function(elem) { garhammar.addTooltipListener(utils, elem); });
+  });
+
+  function addCloseListener(utils, component) {
+    component.addEventListener('click', function(ev) {
+      ev.preventDefault();
+      var closeWrapper = utils.findParentBySelector(this, '.js-close-wrapper');
+      closeWrapper.classList.add('hide');
+      if (closeWrapper.classList.contains('js-abs-tooltip')) {
+        utils.findParentBySelector(closeWrapper, '.js-tooltip-wrapper').classList.remove('dim');
+      }
     });
   }
 
@@ -288,4 +284,3 @@ requirejs(
     });
   }
 );
-

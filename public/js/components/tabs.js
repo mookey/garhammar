@@ -42,8 +42,21 @@ define([templatesName, 'components/base', 'utils/utils'], function(templates, Ba
     var contentId       = activeLink.getAttribute('data-content-id');
     var contents        = this.view.querySelectorAll('.js-tabs-content');
     var content         = contents[contentId];
-    content.innerHTML   = templates[runtimeTemplate]();
-    garhammar.initComponents(content);
+    var sourceUrl       = activeLink.getAttribute('data-runtime-source');
+    if (!sourceUrl) {
+      content.innerHTML   = templates[runtimeTemplate]();
+      garhammar.initComponents(content);
+      return;
+    }
+    this.ajax(
+      {},
+      function(data) {
+        content.innerHTML = templates[runtimeTemplate](JSON.parse(data.responseText));
+        garhammar.initComponents(content);
+      },
+      'get',
+      sourceUrl
+    );
   }
 
   function addTabsListener() {

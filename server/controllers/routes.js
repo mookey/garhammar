@@ -82,36 +82,38 @@ module.exports = function(app) {
 
     req.locals.template = '_pics';
 
-    if (req.xhr) {
-      dpr = req.param('dpr');
-      width = req.param('width');
-      isOverview = req.param('gallery') !== 'true';
-      skip = parseInt(req.param('skip'), 10);
-
-      pics.getSome(skip, 20, function(data) {
-        data.pics.forEach(function(pic) {
-          dimensions = getPicDimensions(width, pic, dpr, isOverview);
-          pictures.push({
-            filename  : pic.filename + '-' + dimensions.quality + '.' + pic.ext,
-            name      : pic.name,
-            vertical  : pic.vertical,
-            desc      : pic.desc,
-            tags      : pic.tags,
-            dateTaken : pic.dateTaken,
-            dateTaken_human : pic.dateTaken_human ? pic.dateTaken_human.substring(8, 20) : '',
-            width     : dimensions.width,
-            height    : dimensions.height,
-            no        : i,
-            _id       : pic._id
-          });
-          i++;
-        });
-        req.locals.pictures = pictures;
-        r(req, res);
-      });
-    } else {
+    if (!req.xhr) {
       r(req, res);
+      return;
     }
+
+    dpr = req.param('dpr');
+    width = req.param('width');
+    isOverview = req.param('gallery') !== 'true';
+    skip = parseInt(req.param('skip'), 10);
+
+    pics.getSome(skip, 20, function(data) {
+      data.pics.forEach(function(pic) {
+        dimensions = getPicDimensions(width, pic, dpr, isOverview);
+        pictures.push({
+          filename  : pic.filename + '-' + dimensions.quality + '.' + pic.ext,
+          name      : pic.name,
+          vertical  : pic.vertical,
+          desc      : pic.desc,
+          tags      : pic.tags,
+          dateTaken : pic.dateTaken,
+          dateTaken_human : pic.dateTaken_human ? pic.dateTaken_human.substring(8, 20) : '',
+          width     : dimensions.width,
+          height    : dimensions.height,
+          no        : i,
+          _id       : pic._id
+        });
+        i++;
+      });
+      req.locals.pictures = pictures;
+      r(req, res);
+    });
+
   });
 
   app.get('/styles', function (req, res) {
@@ -132,6 +134,34 @@ module.exports = function(app) {
 
   app.get('/code', function (req, res) {
     req.locals.template = '_code';
+    r(req, res);
+  });
+
+  app.get('/biografi', function (req, res) {
+    req.locals.template = 'biography';
+    req.locals.hideSidebar = true;
+    r(req, res);
+  });
+
+  app.get('/code/maps/zoom', function(req, res) {
+    req.locals.template = '_code_maps_zoom';
+    r(req, res);
+  });
+
+  app.get('/code/maps/route', function(req, res) {
+    req.locals.template = '_code_maps_route';
+    req.locals.tooltip_0 = {
+      no : 0,
+      message : 'Streets of Stockholm.'
+    };
+    req.locals.tooltip_1 = {
+      no : 1,
+      message : 'Next stop Barcelona. Doors open on the left.'
+    };
+    req.locals.tooltip_2 = {
+      no : 2,
+      message : 'Forza Roma!'
+    };
     r(req, res);
   });
 

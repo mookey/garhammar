@@ -11,9 +11,15 @@
 }
 
 
+.line-pattern {
+  stroke: red;
+  stroke-width: 10px;
+  stroke-opacity: .1;
+}
+
 svg {
   text {
-    font-size: 30px;
+    font-size: 20px;
   }
   .unit {
     fill: #FAFAFA;
@@ -43,12 +49,18 @@ svg {
   }
 }
 
+@media (min-width: $screen-s) {
+  svg text {
+    font-size: 30px;
+  }
+}
+
 .code-route-wrapper {
   position: relative;
 }
 
-.code-google-map-tooltip-marker,
-.code-route-tooltip-marker {
+/*.code-google-map-tooltip-marker,
+.code-route-tooltip-marker {*/
   .question {
     cursor: pointer;
     display: block;
@@ -90,4 +102,77 @@ svg {
     margin-right: 0;
   }
 /*  @include transition(all 0.4s linear);*/
+/*}*/
+
+
+.code-zoom-map {
+
+  font-family: $font-stack-header-light;
+  stroke: #999;
+
+  .cities {
+    stroke: none;
+  }
+
+  .background {
+    fill: #CFEBFC;
+    stroke: #bdbdbd;
+  }
+  .japan-area {
+    fill: $white;
+    stroke-opacity: .3;
+    &:hover {
+      fill: #f7f7f7;
+    }
+  }
+  .water-boundry {
+    fill: $white;
+    stroke: #666;
+    stroke-width: 1px;
+  }
+  &.is-zoomed {
+    .water-boundry {
+      stroke-width: 0;
+    }
+    .japan-area {
+      stroke-opacity: 1;
+      &.is-zoomed {
+        fill: #f7f7f7;
+      }
+    }
+    .cities {
+      display: none;
+    }
+    .water-boundry {
+      stroke-width: 0;
+    }
+    .background {
+      stroke-width: .5px;
+    }
+  }
+  .city {
+    fill: $black;
+  }
+  .line {
+    stroke: $black;
+    stroke-width: .5px;
+  }
+  .tokyo {
+    fill: #ec1a29;
+    .city {
+      fill: #ec1a29;
+    }
+    .line {
+      stroke: #ec1a29;
+    }
+  }
+
+  .zoom-container {
+    -webkit-transition: transform 300ms ease;
+       -moz-transition: transform 300ms ease;
+        -ms-transition: transform 300ms ease;
+         -o-transition: transform 300ms ease;
+            transition: transform 300ms ease;
+  }
+
 }

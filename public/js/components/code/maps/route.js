@@ -10,7 +10,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         coordinates : [59.312009, 18.147598],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.CURVE,
-        tooltip     : 'Stockholm, the start of our journey.',
+        tooltipId   : 0,
         animeTime   : 2000
       },
       {
@@ -95,7 +95,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         coordinates : [39.465722, -0.380909],
         markerType  : route.path.markers.type.REGULAR,
         line        : route.path.line.CURVE,
-        tooltip     : 'Easy now, we\'re getting there.',
+        tooltipId   : 1,
         tooltipPos  : 'left',
         animeTime   : 1000
       },
@@ -103,7 +103,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
         coordinates : [41.880868, 12.474100],
         markerType  : route.path.markers.type.PULSE,
         line        : route.path.line.STRAIGHT,
-        tooltip     : 'Last stop. Welcome to Rome.',
+        tooltipId   : 2,
         animeTime   : 1000
       }
     ]
@@ -130,7 +130,6 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
     map.view        = aView;
     map.graphElem   = map.view.querySelector('.code-route-map');
     map.wrapperElem = map.view.querySelector('.code-route-wrapper');
-    map.tooltipElem = map.view.querySelector('.abs-tooltip');
     setup           = map.createMap(map.graphElem, options);
     map.container   = setup.container;
     map.projection  = setup.projection;
@@ -210,7 +209,7 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
           shadowElem    = undefined;
           i++;
           self.addMarker(currentPoint);
-          if (currentPoint.tooltip) {
+          if (currentPoint.hasOwnProperty('tooltipId')) {
             self.addMarkerTooltipListener(currentPoint);
           }
           if (!nextPoint) {
@@ -250,14 +249,12 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
 
   function addMarkerTooltipListener(currentPoint) {
     var self = this;
-    var markerTooltipWrapper;
-    var markerTooltip;
     var markerTooltipOffsetX = 16;
     var markerTooltipOffsetY = -17;
+    var markerTooltip;
     var coordinates;
-    markerTooltipWrapper  = self.wrapperElem.querySelector('.clone.code-route-tooltip-marker').cloneNode(true);
-    coordinates           = self.convertCoordinates(currentPoint);
-    markerTooltip         = markerTooltipWrapper.querySelector('.question');
+    coordinates   = self.convertCoordinates(currentPoint);
+    markerTooltip = self.view.querySelector('.js-tooltip-icon[data-tooltip-id="' + currentPoint.tooltipId + '"]');
     if (currentPoint.tooltipPos === 'left') {
       markerTooltip.classList.add('left');
       markerTooltip.style.left = coordinates[0] - (3 * markerTooltipOffsetX) + 'px';
@@ -265,24 +262,24 @@ define(['d3', 'topojson', 'utils/utils', 'components/code/maps/maps_base'], func
       markerTooltip.style.left = coordinates[0] + markerTooltipOffsetX + 'px';
     }
     markerTooltip.style.top = coordinates[1] + markerTooltipOffsetY + 'px';
-    markerTooltipWrapper.classList.remove('clone');
-    markerTooltipWrapper.classList.remove('hide');
-    self.wrapperElem.appendChild(markerTooltipWrapper);
-    markerTooltip.addEventListener('click', function(ev) {
-      var tooltip;
-      ev.preventDefault();
-      this.classList.add('hide');
-      tooltip = markerTooltipWrapper.querySelector('.abs-tooltip');
-      tooltip.querySelector('.tooltip-message').innerHTML = currentPoint.tooltip;
-      tooltip.style.bottom = (self.graphElem.offsetHeight - coordinates[1]) + 'px';
-      tooltip.style.left = (coordinates[0] - 110) + 'px';
-      tooltip.classList.remove('hide');
-      tooltip.addEventListener('click', function(ev) {
-        ev.preventDefault();
-        this.classList.add('hide');
-        markerTooltip.classList.remove('hide');
-      });           
-    });
+    markerTooltip.classList.remove('hide');
+    // garhammar.addTooltipListener(utils, markerTooltip);
+    // self.wrapperElem.appendChild(markerTooltip);
+    // markerTooltip.addEventListener('click', function(ev) {
+    //   var tooltip;
+    //   ev.preventDefault();
+    //   this.classList.add('hide');
+    //   tooltip = markerTooltipWrapper.querySelector('.abs-tooltip');
+    //   tooltip.querySelector('.tooltip-message').innerHTML = currentPoint.tooltip;
+    //   tooltip.style.bottom = (self.graphElem.offsetHeight - coordinates[1]) + 'px';
+    //   tooltip.style.left = (coordinates[0] - 110) + 'px';
+    //   tooltip.classList.remove('hide');
+    //   tooltip.addEventListener('click', function(ev) {
+    //     ev.preventDefault();
+    //     this.classList.add('hide');
+    //     markerTooltip.classList.remove('hide');
+    //   });           
+    // });
   }
 
 

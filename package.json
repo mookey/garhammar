@@ -12,7 +12,7 @@
     "body-parser": "^1.6.5",
     "compression": "^1.0.9",
     "express": "^4.4.3",
-    "express3-handlebars": "^0.5.0",
+    "express-handlebars": "^1.1.0",
     "google-caja": "0.0.2",
     "handlebars": "^2.0.0-alpha.4",
     "imagemagick": "^0.1.3",

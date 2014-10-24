@@ -1,7 +1,7 @@
 'use strict';
 
 var express       = require('express'),
-    exphbs        = require('express3-handlebars'),
+    exphbs        = require('express-handlebars'),
     compress      = require('compression')(),
     session       = require('express-session'),
     MongoStore    = require('connect-mongo')(session),

@@ -150,7 +150,7 @@ legend {
 }
 
 p {
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 @font-face {
@@ -1479,6 +1479,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 
 h1, .h1 {
   font-size: 44px;
+  line-height: 48px;
 }
 
 h2, .h2 {
@@ -1488,8 +1489,18 @@ h2, .h2 {
 h3, .h3 {
   margin: 10px 0 10px 0;
   font-size: 24px;
+  line-height: 28px;
 }
 
+@media (min-width: 500px) {
+  h1, .h1 {
+    line-height: normal;
+  }
+
+  h3, .h3 {
+    line-height: normal;
+  }
+}
 .small {
   font-size: 12px;
 }
@@ -1746,12 +1757,12 @@ body {
 #main {
   max-width: 1100px;
   min-height: 1100px;
-  padding: 70px 20px 100px 20px;
+  padding: 70px 10px 100px 10px;
 }
 
 @media (min-width: 500px) {
   #main {
-    padding-top: 60px;
+    padding: 60px 20px 100px 20px;
   }
 }
 .col {
@@ -1817,7 +1828,7 @@ body {
   display: inline-block;
   box-sizing: border-box;
   padding: 15px 15px 10px 15px;
-  border-left: 5px solid transparent;
+  border-left: 2px solid transparent;
   background: #fcfcfc;
 }
 .tabs .tab:hover {
@@ -1839,8 +1850,8 @@ body {
   border-bottom: 1px solid #e5e5e5;
 }
 .tabs .tabs-content {
-  border-left: 5px solid #e5e5e5;
-  padding: 15px 10px 30px 15px;
+  border-left: 2px solid #e5e5e5;
+  padding: 15px 0 30px 5px;
   border-top: 1px solid #e5e5e5;
 }
 .tabs .tabs-content-last {
@@ -1854,6 +1865,16 @@ body {
   padding: 40px 0;
 }
 
+@media (min-width: 500px) {
+  .tabs .tab {
+    padding: 15px 15px 10px 15px;
+    border-left: 5px solid transparent;
+  }
+  .tabs .tabs-content {
+    border-left: 5px solid #e5e5e5;
+    padding: 15px 10px 30px 15px;
+  }
+}
 @media (min-width: 768px) {
   .tabs li {
     box-sizing: border-box;
@@ -1994,6 +2015,19 @@ body {
   transform: rotate(180deg);
 }
 
+.biography p {
+  line-height: 20px;
+  border-left: 1px solid #cccccc;
+  padding-left: 10px;
+  margin: 25px 0;
+}
+.biography .red-border {
+  border-color: #e76969;
+}
+.biography .blue-border {
+  border-color: #2bacb8;
+}
+
 .alert {
   border: 3px solid #8ed378;
   color: #469c2b;
@@ -2103,8 +2137,14 @@ body {
   fill: red;
 }
 
+.line-pattern {
+  stroke: red;
+  stroke-width: 10px;
+  stroke-opacity: .1;
+}
+
 svg text {
-  font-size: 30px;
+  font-size: 20px;
 }
 svg .unit {
   fill: #FAFAFA;
@@ -2133,16 +2173,18 @@ svg .step {
   stroke: blue;
 }
 
+@media (min-width: 500px) {
+  svg text {
+    font-size: 30px;
+  }
+}
 .code-route-wrapper {
   position: relative;
 }
 
-.code-google-map-tooltip-marker,
-.code-route-tooltip-marker {
-  /*  @include transition(all 0.4s linear);*/
-}
-.code-google-map-tooltip-marker .question,
-.code-route-tooltip-marker .question {
+/*.code-google-map-tooltip-marker,
+.code-route-tooltip-marker {*/
+.question {
   cursor: pointer;
   display: block;
   padding: 5px;
@@ -2159,8 +2201,7 @@ svg .step {
   -o-transition: box-shadow 0.2s linear;
   transition: box-shadow 0.2s linear;
 }
-.code-google-map-tooltip-marker .question:before,
-.code-route-tooltip-marker .question:before {
+.question:before {
   right: 85%;
   top: 50%;
   border: solid transparent;
@@ -2175,20 +2216,85 @@ svg .step {
   border-width: 12px;
   margin-top: -12px;
 }
-.code-google-map-tooltip-marker .question:hover,
-.code-route-tooltip-marker .question:hover {
+.question:hover {
   color: white;
   box-shadow: 0 0 9px 0px white;
 }
-.code-google-map-tooltip-marker .question.left:before,
-.code-route-tooltip-marker .question.left:before {
+.question.left:before {
   left: 85%;
   border-color: transparent;
   border-left-color: #333333;
 }
-.code-google-map-tooltip-marker .icon-question,
-.code-route-tooltip-marker .icon-question {
+
+.icon-question {
   margin-right: 0;
+}
+
+/*  @include transition(all 0.4s linear);*/
+/*}*/
+.code-zoom-map {
+  font-family: "Oswald light", sans-serif;
+  stroke: #999;
+}
+.code-zoom-map .cities {
+  stroke: none;
+}
+.code-zoom-map .background {
+  fill: #CFEBFC;
+  stroke: #bdbdbd;
+}
+.code-zoom-map .japan-area {
+  fill: white;
+  stroke-opacity: .3;
+}
+.code-zoom-map .japan-area:hover {
+  fill: #f7f7f7;
+}
+.code-zoom-map .water-boundry {
+  fill: white;
+  stroke: #666;
+  stroke-width: 1px;
+}
+.code-zoom-map.is-zoomed .water-boundry {
+  stroke-width: 0;
+}
+.code-zoom-map.is-zoomed .japan-area {
+  stroke-opacity: 1;
+}
+.code-zoom-map.is-zoomed .japan-area.is-zoomed {
+  fill: #f7f7f7;
+}
+.code-zoom-map.is-zoomed .cities {
+  display: none;
+}
+.code-zoom-map.is-zoomed .water-boundry {
+  stroke-width: 0;
+}
+.code-zoom-map.is-zoomed .background {
+  stroke-width: .5px;
+}
+.code-zoom-map .city {
+  fill: black;
+}
+.code-zoom-map .line {
+  stroke: black;
+  stroke-width: .5px;
+}
+.code-zoom-map .tokyo {
+  fill: #ec1a29;
+}
+.code-zoom-map .tokyo .city {
+  fill: #ec1a29;
+}
+.code-zoom-map .tokyo .line {
+  stroke: #ec1a29;
+}
+.code-zoom-map .zoom-container {
+  -webkit-transition: transform 300ms ease;
+  -moz-transition: transform 300ms ease;
+  -ms-transition: transform 300ms ease;
+  -o-transition: transform 300ms ease;
+  transition: transform 300ms ease;
 }
 
 .code {

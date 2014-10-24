@@ -1,18 +1,33 @@
 <div class="js-component" data-component="code/maps/route">
-  <div class="code-route-wrapper">
+  <div class="code-route-wrapper js-tooltip-wrapper">
     <svg class="code-route-map" width="300" height="150" data-init-width="300" data-init-height="150">
      <defs>
         <filter id="blur">
           <feGaussianBlur stdDeviation="1"/>
         </filter>
         <pattern id="diagonalHatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="0" x2="0" y2="10" style="stroke: red; stroke-width: 10px; stroke-opacity: .1;"/>
+          <line x1="0" y1="0" x2="0" y2="10" class="line-pattern"/>
         </pattern>
       </defs>
 
     </svg>
-   
-    <div class="clone hide code-route-tooltip-marker">
+
+    <a class="question hide js-tooltip-icon" data-tooltip-id="0">
+      <span class="icon icon-question"></span>
+    </a>
+    <a class="question hide js-tooltip-icon" data-tooltip-id="1">
+      <span class="icon icon-question"></span>
+    </a>
+    <a class="question hide js-tooltip-icon" data-tooltip-id="2">
+      <span class="icon icon-question"></span>
+    </a>
+    {{> _tooltip tooltip_0}}
+    {{> _tooltip tooltip_1}}
+    {{> _tooltip tooltip_2}}
+
+
+
+<!--     <div class="clone hide code-route-tooltip-marker">
       <div class="abs-tooltip hide">
         <a class="icon icon-cross js-close"></a>
         <div class="tooltip-message">
@@ -24,10 +39,9 @@
           <path d="M 2 8 Q 22 23 2 38"></path>
         </svg>
       </div>
-      <a class="question">
-        <span class="icon icon-question"></span>
-      </a>
-    </div>
+
+
+    </div>-->
 
   </div>
 </div>

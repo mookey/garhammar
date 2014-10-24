@@ -8,12 +8,12 @@ body {
 #main {
   max-width: 1100px;
   min-height: 1100px;
-  padding: 70px 20px 100px 20px;
+  padding: 70px 10px 100px 10px;
 }
 
 @media (min-width: $screen-s) {
   #main {
-    padding-top: 60px;
+    padding: 60px 20px 100px 20px;
   }
 }
 
@@ -81,7 +81,7 @@ body {
     display: inline-block;
     box-sizing: border-box;
     padding: 15px 15px 10px 15px;
-    border-left: 5px solid transparent;
+    border-left: 2px solid transparent;
     background: $box-grey;
     &:hover {
       border-left-color: $box-border-grey;
@@ -99,8 +99,8 @@ body {
     border-bottom: 1px solid $box-border-grey;
   }
   .tabs-content {
-    border-left: 5px solid $box-border-grey;
-    padding: 15px 10px 30px 15px;
+    border-left: 2px solid $box-border-grey;
+    padding: 15px 0 30px 5px;
     border-top: 1px solid $box-border-grey;
   }
   .tabs-content-last {
@@ -112,6 +112,19 @@ body {
   }
   .spinner {
     padding: 40px 0;
+  }
+}
+
+@media (min-width: $screen-s) {
+  .tabs {
+    .tab {
+      padding: 15px 15px 10px 15px;
+      border-left: 5px solid transparent;
+    }
+    .tabs-content {
+      border-left: 5px solid $box-border-grey;
+      padding: 15px 10px 30px 15px;
+    }
   }
 }
 
@@ -268,5 +281,20 @@ body {
     .icon {
       transform: rotate(180deg);
     }
+  }
+}
+
+.biography {
+  p {
+    line-height: 20px;
+    border-left: 1px solid $disabled-border-color;
+    padding-left: 10px;
+    margin: 25px 0;
+  }
+  .red-border {
+    border-color: $red;
+  }
+  .blue-border {
+    border-color: $blue;
   }
 }

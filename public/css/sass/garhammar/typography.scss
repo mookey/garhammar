@@ -39,6 +39,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 
 h1, .h1 {
   font-size: $font-size-xx-large;
+  line-height: 48px;
 }
 
 h2, .h2 {
@@ -48,6 +49,16 @@ h2, .h2 {
 h3, .h3 {
   margin: 10px 0 10px 0;
   font-size: $font-size-large;
+  line-height: 28px;
+}
+
+@media (min-width: $screen-s) {
+  h1, .h1 {
+    line-height: normal;
+  }
+  h3, .h3 {
+    line-height: normal;
+  }
 }
 
 
