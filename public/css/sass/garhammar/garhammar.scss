@@ -75,109 +75,53 @@ body {
 }
 
 .tabs {
+  li {
+    box-sizing: border-box;
+    border: 0;
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
   .tab {
-    border-top: 1px solid $box-border-grey;
+    border: 0;
     width: 100%;
     display: inline-block;
-    box-sizing: border-box;
-    padding: 15px 15px 10px 15px;
-    border-left: 2px solid transparent;
-    background: $box-grey;
+    padding: 10px 0 15px 0;
+    border-top: 5px solid transparent;
+    background: $white;
+    font-size: $font-size-text-large;
+    text-align: center;
     &:hover {
-      border-left-color: $box-border-grey;
+      border-top-color: $box-border-grey;
     }
-    .icon {
-      margin-top: -4px;
-      float: right;
-      @include transition(transform 0.5s ease);
-    }
+  }
+  li {
+    display: inline-block;
   }
   .active {
-    border-left-color: $box-border-grey;
+    border-top: 5px solid $box-border-grey;
   }
-  .tabs-last {
-    border-bottom: 1px solid $box-border-grey;
+  .nav-four li {
+    width: 25%;
   }
-  .tabs-content {
-    border-left: 2px solid $box-border-grey;
-    padding: 15px 0 30px 5px;
-    border-top: 1px solid $box-border-grey;
+  .nav-two li {
+    width: 50%;
   }
-  .tabs-content-last {
-    border-bottom: 1px solid $box-border-grey;
-    border-top: 0;
+  .nav-three li {
+    width: 33%;
   }
-  .tabs-large {
-    display: none;
+  .tab-content {
+    border: 0;
+    border-left: 5px solid $box-border-grey;
+    padding: 0 0 0 15px;
   }
   .spinner {
     padding: 40px 0;
   }
 }
 
-@media (min-width: $screen-s) {
-  .tabs {
-    .tab {
-      padding: 15px 15px 10px 15px;
-      border-left: 5px solid transparent;
-    }
-    .tabs-content {
-      border-left: 5px solid $box-border-grey;
-      padding: 15px 10px 30px 15px;
-    }
-  }
-}
 
-@media (min-width: $screen-md) {
-  .tabs {
-    li {
-      box-sizing: border-box;
-      border: 0;
-      &:first-child {
-        border-top: 0;
-      }
-    }
-    .tabs-large {
-      text-align: center;
-      display: block;
-      a {
-        border: 0;
-        width: 100%;
-        display: inline-block;
-        padding: 10px 0 15px 0;
-        border-top: 5px solid transparent;
-        background: $white;
-        font-size: $font-size-text-large;
-        &:hover {
-          border-top-color: $box-border-grey;
-        }
-      }
-      li {
-        display: inline-block;
-      }
-      .active {
-        border-top: 5px solid $box-border-grey;
-      }
-    }
-    .tab {
-      display: none;
-    }
-    .nav-four li {
-      width: 25%;
-    }
-    .nav-two li {
-      width: 50%;
-    }
-    .nav-three li {
-      width: 33%;
-    }
-    .tabs-content {
-      border: 0;
-      border-left: 5px solid $box-border-grey;
-      padding: 0 0 0 15px;
-    }
-  }
-}
 
 .spinner {
   width: 32px;
