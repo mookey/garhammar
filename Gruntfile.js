@@ -227,7 +227,7 @@ module.exports = function(grunt) {
                 }
                 return contents;
            },
-           include : [
+           include :[
               'requireLib',
               'components/sidebar',
               'components/tabs',
